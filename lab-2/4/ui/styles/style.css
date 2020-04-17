@@ -1,0 +1,50 @@
+body {
+  font-family: "Roboto", sans-serif;
+}
+
+#app {
+    margin: 100px auto 0 auto;
+    width: 30%;
+}
+
+.login-component {
+  width:180px;
+  border: 1px solid #dedede;
+  padding:25px;
+  margin: 0 auto 0 auto;
+}
+
+input {
+  padding: 7px;
+  display: block;
+  margin-bottom: 15px;
+  outline: none;
+  border: 1px solid #dedede;
+}
+
+input:focus {
+  border: 1px solid #96c3fd;
+}
+
+button {
+  margin: 0px;
+  width: 186px;
+  background-color: #0053c0;
+  border: 0px;
+  padding: 8px;
+  color: white;
+  outline: none;
+}
+
+button:hover {
+    cursor: pointer;
+    background-color: #0163e2;
+}
+
+
+
+.products-component {
+  width:200px;
+  margin: 0 auto 0 auto;
+  text-align: center;
+}

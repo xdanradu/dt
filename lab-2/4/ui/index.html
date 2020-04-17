@@ -1,0 +1,33 @@
+<html>
+  <head>
+    <title>Login</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles/style.css" />
+  </head>
+
+  <body>
+    <div id="app">
+      <div class="login-component" v-if="status !== 'ALLOW'">
+        <input v-model="username" placeholder="Username" />
+        <input v-model="password" type="password" placeholder="Password" />
+        <button v-on:click="login()">Login</button>
+      </div>
+
+      <div class="products-component">
+        <h3 v-if="!!status">Status: {{ status }}</h3>
+
+        <h3 v-if="products.length > 0">Products</h3>
+        <div v-for="product in products">
+          <h3>{{ product.name }}</h3>
+        </div>
+      </div>
+    </div>
+
+    <script src="libs/vue.js"></script>
+    <script src="libs/axios.js"></script>
+    <script src="src/app.js"></script>
+  </body>
+</html>

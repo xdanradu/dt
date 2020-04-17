@@ -1,0 +1,51 @@
+body {
+  margin: 30px;
+}
+
+select {
+  margin-top: -5px;
+  padding: 5px;
+}
+
+ul {
+  list-style: none;
+  display: inline-block;
+  margin: 0px;
+  margin-bottom: 20px;
+  margin-top: 0px;
+  padding: 0px;
+  padding-right: 10px;
+}
+
+input {
+  font-size: 16px;
+  padding: 10px;
+  width: 50px;
+  text-align: center;
+}
+
+.invalid-input {
+  border: 3px solid orange;
+  -webkit-transition: all 1000ms linear;
+  -ms-transition: all 1000ms linear;
+  transition: all 1000ms linear;
+}
+
+.valid-input {
+  border: 3px solid green;
+  background-color: green;
+  color: white;
+  -webkit-transition: all 1000ms linear;
+  -ms-transition: all 1000ms linear;
+  transition: all 1000ms linear;
+}
+
+button {
+  margin-top: 10px;
+  padding: 10px;
+}
+
+code {
+  background-color: #efffec;
+  margin: 0px;
+}

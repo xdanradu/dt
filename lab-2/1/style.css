@@ -1,0 +1,45 @@
+body {
+  font-family: "Roboto", sans-serif;
+}
+
+#app {
+  margin: 100px auto 0 auto;
+  width: 400px;
+  text-align: center;
+}
+
+.message {
+  border: 1px solid #777;
+  padding: 7px;
+  margin-bottom: 25px;
+  outline: none;
+}
+
+.message:focus {
+  border: 1px solid #0053c0;
+  background-color: #f1f1f1;
+}
+
+.empty-output {
+  padding: 7px;
+  color: #777;
+}
+
+.output {
+  padding: 7px;
+  color: #0053c0;
+}
+
+.process-button {
+  border: 0px;
+  background-color: #0053c0;
+  color: white;
+  padding: 10px;
+  margin-top: 25px;
+  width: 180px;
+}
+
+.process-button:hover {
+  background-color: #0160db;
+  cursor: pointer;
+}

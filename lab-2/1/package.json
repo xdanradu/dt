@@ -1,0 +1,10 @@
+{
+  "name": "client",
+  "version": "0.0.1",
+  "scripts": {
+    "start": "browser-sync start --server --config bs-config.json"
+  },
+  "dependencies": {
+    "browser-sync": "^2.26.7"
+  }
+}

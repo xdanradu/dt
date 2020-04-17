@@ -1,0 +1,13 @@
+{
+  "name": "server",
+  "version": "0.0.1",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.12.2",
+    "cors": "^2.8.5",
+    "express": "3.x",
+    "nodemon": "^2.0.3"
+  }
+}
