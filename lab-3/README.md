@@ -24,7 +24,7 @@ npm run start
 
 *Example C:/Workspace/dt/lab-3/client npm run start*
 
-You can find the __start__ command defined in *package.json* located.
+You can find the __start__ command defined in *package.json*.
 
 # Important
 
