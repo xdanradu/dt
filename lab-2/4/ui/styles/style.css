@@ -1,16 +1,16 @@
 body {
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
 
 #app {
-    margin: 100px auto 0 auto;
-    width: 30%;
+  margin: 100px auto 0 auto;
+  width: 30%;
 }
 
 .login-component {
-  width:180px;
+  width: 180px;
   border: 1px solid #dedede;
-  padding:25px;
+  padding: 25px;
   margin: 0 auto 0 auto;
 }
 
@@ -37,14 +37,12 @@ button {
 }
 
 button:hover {
-    cursor: pointer;
-    background-color: #0163e2;
+  cursor: pointer;
+  background-color: #0163e2;
 }
 
-
-
 .products-component {
-  width:200px;
+  width: 200px;
   margin: 0 auto 0 auto;
   text-align: center;
 }

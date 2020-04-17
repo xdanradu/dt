@@ -1,14 +1,13 @@
 var counter = 0;
 
 function printValue(divId, value) {
-    document.getElementById(divId).innerHTML = value;
+  document.getElementById(divId).innerHTML = value;
 }
-printValue("counter", 0);
+printValue('counter', 0);
 
-document.getElementById("inc").addEventListener("click",
-    increment);
+document.getElementById('inc').addEventListener('click', increment);
 
 function increment() {
-    counter++;
-    printValue("counter", counter);
+  counter++;
+  printValue('counter', counter);
 }

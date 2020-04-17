@@ -1,19 +1,26 @@
 <html>
-<head>
+  <head>
     <title>Chat client</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="style.css" />
-</head>
-<body>
+  </head>
+  <body>
     <div class="app">
-        <h3 id="client-id"></h3>
-        <div class="messages"></div>
-        <input class="message" type="text" id="message" placeholder="Write a message" />
-        <button class="send-button" id="send">Send</button>
+      <h3 id="client-id"></h3>
+      <div class="messages"></div>
+      <input
+        class="message"
+        type="text"
+        id="message"
+        placeholder="Write a message"
+      />
+      <button class="send-button" id="send">Send</button>
     </div>
-
 
     <script src="node_modules/socket.io-client/dist/socket.io.js"></script>
     <script src="client.js"></script>
-</body>
+  </body>
 </html>

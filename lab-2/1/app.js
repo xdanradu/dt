@@ -1,17 +1,17 @@
 function run() {
   new Vue({
-    el: "#app",
+    el: '#app',
     data: {
-      message: "",
+      message: ''
     },
     methods: {
       process: function () {
-        console.log("Input string value: " + this.message);
-      },
-    },
+        console.log('Input string value: ' + this.message);
+      }
+    }
   });
 }
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener('DOMContentLoaded', () => {
   run();
 });

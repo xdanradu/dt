@@ -1,0 +1,10 @@
+{
+  "name": "td",
+  "version": "0.0.0",
+  "scripts": {
+    "prettier": "prettier --config ./.prettierrc --list-different \"**/*{.html,.js,.json,.css}\" --write"
+  },
+  "devDependencies": {
+    "prettier": "^2.0.2"
+  }
+}

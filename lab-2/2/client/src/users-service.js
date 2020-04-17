@@ -1,10 +1,9 @@
 function users() {
+  get = function () {
+    return axios.get('http://localhost:3000/users');
+  };
 
-    get = function() {
-        return axios.get("http://localhost:3000/users");
-    }
-
-    return {
-        get: get
-    }
+  return {
+    get: get
+  };
 }
