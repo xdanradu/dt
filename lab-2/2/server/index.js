@@ -1,5 +1,5 @@
-var api = require('./api.js').app;
-var users = require('./users.json');
+var api = require('./src/api.js').app;
+var users = require('./src/users.json');
 
 api.get('/', function (request, response) {
   response.json('NodeJS REST API');
