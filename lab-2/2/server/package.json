@@ -7,7 +7,9 @@
   "dependencies": {
     "body-parser": "^1.12.2",
     "cors": "^2.8.5",
-    "express": "3.x",
+    "express": "3.x"
+  },
+  "devDependencies": {
     "nodemon": "^2.0.3"
   }
 }
