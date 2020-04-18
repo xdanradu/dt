@@ -5,8 +5,8 @@ function run() {
       message: ''
     },
     methods: {
-      process: function () {
-        console.log('Input string value: ' + this.message);
+      doSomething: function () {
+        console.log('The input string value is: ' + this.message);
       }
     }
   });

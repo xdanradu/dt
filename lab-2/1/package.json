@@ -2,9 +2,9 @@
   "name": "client",
   "version": "0.0.1",
   "scripts": {
-    "start": "browser-sync start --server --config bs-config.json"
+    "start": "live-server --port=4200"
   },
   "dependencies": {
-    "browser-sync": "^2.26.7"
+    "live-server": "^1.2.1"
   }
 }
