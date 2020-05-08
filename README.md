@@ -20,7 +20,7 @@
 
 ## Evaluare
 
-### Prezentare proiect online: 10 min
+### Prezentare proiect online
 
 - Descrierea temei individuale
 - Clonarea repository-ului pe calculatorul meu
