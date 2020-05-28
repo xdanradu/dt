@@ -33,6 +33,7 @@ var app = new Vue({
     encode: function (bits) {
       // This function must be changed to allow any number of data bits
       // Right now it only works for 4 data bits
+      console.log(this.numberOfDataBits);
       var c4 = this.parity(
         parseInt(bits[1].data) + parseInt(bits[2].data) + parseInt(bits[3].data)
       );

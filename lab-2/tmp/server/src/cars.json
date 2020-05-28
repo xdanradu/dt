@@ -1,0 +1,20 @@
+[
+    { "name": "Audi", 
+      "power": "150", 
+      "color": "blue", 
+      "motorizare":"benzina",
+      "capacitateCilindrica":"2000", 
+      "descriere":"1234",
+      "year":2018, 
+      "price":""
+    },
+    { "name": "Bmw", 
+      "power": "150", 
+      "color": "blue", 
+      "motorizare":"benzina",
+      "capacitateCilindrica":"2000", 
+      "descriere":"1234",
+      "year":2018, 
+      "price":""
+    }
+]
