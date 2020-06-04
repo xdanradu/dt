@@ -1,42 +1,45 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
-    <meta content="utf-8" http-equiv="encoding" />
-    <title>Users manager</title>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="styles/style.css" />
-    <script type="text/javascript" src="libs/vue.js"></script>
-    <script type="text/javascript" src="libs/axios.js"></script>
-    <script type="text/javascript" src="src/users-service.js"></script>
-  </head>
 
-  <body>
-    <div id="app">
-      <div class="title">Users</div>
+<head>
+  <meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+  <meta content="utf-8" http-equiv="encoding" />
+  <title>Users manager</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles/style.css" />
+  <link rel="stylesheet" href="styles/vue-material.css" />
+  <script type="text/javascript" src="libs/vue.js"></script>
+  <script type="text/javascript" src="libs/vue-material.js"></script>
+  <script type="text/javascript" src="libs/axios.js"></script>
+  <script type="text/javascript" src="src/users-service.js"></script>
+</head>
 
-      <p style="text-align: center" v-if="users.length == 0">No users found</p>
+<body>
+  <div id="app">
 
-      <ul class="user-list" v-if="users.length > 0">
-        <li>
-          <div class="user-row-header">
-            <div class="user-name">Name</div>
-            <div class="user-city">City</div>
-          </div>
-        </li>
+    <div class="title">Cars</div>
 
-        <li v-for="(user, index) in users">
-          <div class="user-row">
-            <div class="user-name" v-on:click="goTo(index)">{{ user.name }}</div>
-            <div class="user-city"><i>{{ user.city }}</i></div>
-            <div class="delete-btn" v-on:click="deleteUser(index)">x</div>
-          </div>
-        </li>
-      </ul>
-    </div>
-    <script src="src/app.js"></script>
-  </body>
+    <p style="text-align: center" v-if="cars.length == 0">No users found</p>
+
+    <ul class="user-list" v-if="cars.length > 0">
+      <li>
+        <div class="user-row-header">
+          <div class="user-name">Name</div>
+          <div class="user-city">Price</div>
+        </div>
+      </li>
+
+      <li v-for="car in cars">
+        <div class="">
+          <a :href="'details.html?id='+car.id">{{ car.name }}</a>
+          <span class=""><i>{{ car.price }}</i></span>
+          <button v-on:click="deleteCar(car.id)">Delete</button>
+          <a :href="'update.html?id='+car.id" target="_self">Update</a>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <script src="src/app.js"></script>
+</body>
+
 </html>

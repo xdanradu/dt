@@ -1,0 +1,21 @@
+.container {
+    display:flex;
+    background-color: #dedede;
+    padding:1px;
+    flex-wrap: wrap;
+    flex-direction: row;
+    width:50%;
+    margin: auto;
+}
+
+.label {
+    padding:20px;
+    flex:1;
+    background-color:#fefefe;
+}
+
+.value {
+    padding: 20px;
+    background-color: #aaa;
+    flex:1;
+}

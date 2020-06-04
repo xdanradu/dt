@@ -1,15 +1,25 @@
 <html>
-    <head>
-        <script type="text/javascript" src="libs/vue.js"></script>
-        <script type="text/javascript" src="libs/axios.js"></script>
-    </head>
-    <body>
-        <div id="details">
-            Detalii pentru produsul cu index-ul: {{ index }} 
-            <h1>{{user.name}}</h1>
-            <h1>{{user.city}}</h1>
-        </div>
 
-        <script src="src/details.js"></script>
-    </body>
+<head>
+    <link rel="stylesheet" href="styles/details.css" />
+    <script type="text/javascript" src="libs/vue.js"></script>
+    <script type="text/javascript" src="libs/axios.js"></script>
+</head>
+
+<body>
+    <a href="index.html">Home</a>
+    <div id="details">
+        <h1>Detalii pentru produsul cu id-ul: {{ id }}</h1>
+        <div class="container">
+            <div class="custom"></div>
+            <div class="label">Name:</div>
+            <div class="value">{{car.name}}</div>
+        </div>
+        <div class="label">Price:</div>
+        <div class="value">{{car.price}}</div>
+    </div>
+    </div>
+    <script src="src/details.js"></script>
+</body>
+
 </html>

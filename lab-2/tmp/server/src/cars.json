@@ -1,20 +1,35 @@
 [
-    { "name": "Audi", 
-      "power": "150", 
-      "color": "blue", 
-      "motorizare":"benzina",
-      "capacitateCilindrica":"2000", 
-      "descriere":"1234",
-      "year":2018, 
-      "price":""
-    },
-    { "name": "Bmw", 
-      "power": "150", 
-      "color": "blue", 
-      "motorizare":"benzina",
-      "capacitateCilindrica":"2000", 
-      "descriere":"1234",
-      "year":2018, 
-      "price":""
-    }
+  {
+      "id": 1,
+      "name": "Dacia 1310",
+      "power": "70",
+      "color": "red",
+      "motorizare": "benzina",
+      "capacitateCilindrica": "1200",
+      "descriere": "test",
+      "year": 2020,
+      "price": "5000 EUR"
+  },
+  {
+      "id": 2,
+      "name": "bmw",
+      "power": "70",
+      "color": "red",
+      "motorizare": "benzina",
+      "capacitateCilindrica": "1200",
+      "descriere": "test",
+      "year": 2020,
+      "price": "5000 EUR"
+  },
+  {
+      "id": 3,
+      "name": "audi",
+      "power": "70",
+      "color": "red",
+      "motorizare": "benzina",
+      "capacitateCilindrica": "1200",
+      "descriere": "test",
+      "year": 2020,
+      "price": "5000 EUR"
+  }
 ]

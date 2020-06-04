@@ -1,27 +1,27 @@
 function run() {
-  new Vue({
+  let indexComponent = new Vue({
     el: '#app',
     data: {
-      users: [],
+      cars: [],
       usersService: null,
       message: ''
     },
     created: function () {
       this.usersService = users();
-      this.usersService.get().then(response => (this.users = response.data));
+      this.usersService.get().then(response => (this.cars = response.data));
     },
     methods: {
-      deleteUser: function(index) {
-        console.log('HTTP DELETE spre backend, user: '+index);
-        this.usersService.remove(index).then(response => {
-          this.usersService.get().then(response => (this.users = response.data));  
+      deleteCar: function(id) {
+        console.log('HTTP DELETE spre backend, car: '+id);
+        this.usersService.remove(id).then(response => {
+          this.usersService.get().then(response => (this.cars = response.data));  
         });
       },
-      goTo: function(index) {
-          window.open("details.html?id="+index, "_self");
-      }
     }
   });
+
+  indexComponent.use(VueMaterial);
+
 }
 
 document.addEventListener('DOMContentLoaded', () => {
