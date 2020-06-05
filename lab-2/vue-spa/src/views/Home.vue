@@ -5,8 +5,8 @@
         <md-card>
           <md-card-header>
             <md-card-header-text>
-              <div class="md-title">Media card</div>
-              <div class="md-subhead">Normal size</div>
+              <div class="md-title">Nume produs</div>
+              <div class="md-subhead">Price: 5000</div>
             </md-card-header-text>
 
             <md-card-media>

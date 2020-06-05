@@ -1,9 +1,6 @@
-```
-npm install @vue/cli
-```
+# vue-demo
 
-vue create app-name
-
+## Project setup
 ```
 npm install
 ```
@@ -16,11 +13,6 @@ npm run serve
 ### Compiles and minifies for production
 ```
 npm run build
-```
-
-### Run your unit tests
-```
-npm run test:unit
 ```
 
 ### Lints and fixes files
