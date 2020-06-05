@@ -9,6 +9,8 @@
     - Afisare detalii articol selectat
     - Actualizare articol existent
     - Minimum 3 pagini HTML
+    - Produsul sa aiba cel putin 7 caracteristici (id, nume, pret, ... cel putin 4 caracteristici individuale ale produsului ales)
+    - Cel putin 10 produse
 ### Aplicatie server: JavaScript Express sau Java, C#, PHP, Python...
     - Aplicatie REST
     - Functii care permit operatii CRUD
