@@ -1,0 +1,19 @@
+body {
+  padding: 20px;
+  background-color: #f5f5f5;
+}
+
+input {
+  padding: 15px;
+  border: 1px solid #777;
+  font-size: 22px;
+  color: navy;
+}
+
+button {
+  padding: 18px;
+}
+
+button:hover {
+  cursor: pointer;
+}

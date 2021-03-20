@@ -1,0 +1,40 @@
+<html>
+<head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+    <meta content="utf-8" http-equiv="encoding" />
+    <title>First VueJS App</title>
+    <link
+            href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap"
+            rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <script type="text/javascript" src="vue.js"></script>
+    <script type="text/javascript" src="axios.js"></script>
+    <script src="app.js"></script>
+</head>
+<body>
+
+    <div id="app">
+        <!--
+        {{ message }}
+        <br>
+        <input class="input-field" v-model="message" placeholder="Type something" />
+        -->
+
+
+
+        <br>
+        <div class="empty" v-if="users.length > 0">
+            {{ users.length }} users downloaded successfully
+        </div>
+
+        <div class="empty" v-for="user in users">
+            <p>{{user.id}} {{ user.email }} <button v-on:click="deleteUser(user.id)">X</button>
+
+            </p>
+        </div>
+
+    </div>
+
+</body>
+</html>
