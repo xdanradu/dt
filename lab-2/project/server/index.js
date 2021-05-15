@@ -23,12 +23,26 @@ api.put('/cars', function (request, response) {
 
 api.post('/cars', function (request, response) {
   // in request o sa-mi vina un obiect de tip car care o sa aiba un anumit id
-  console.log(request.body);//un obiect de tipul car actualizat pe client
+  // console.log(request.body);//un obiect de tipul car actualizat pe client
   // citim cars din fisier pe baza id-ului primit de la client
-  // cautam daca exista indexul de pe request.body
+  let car = request.body;
+  let cars = getCars();// citire json din fisier
+  // cautam daca exista id de pe request.body
   // daca exista actualizam parametrii acestui produs/item
+  for(let i=0; i < cars.length; i++) {
+    if (cars[i].id === car.id) {
+      cars[i] = car;
+    }
+  }
+
   // salvam in fisier produsele actualizate
-  response.json('Car was saved succesfully');
+  try {
+    fs.writeFileSync(carsFilepath, JSON.stringify(cars));// salvare json array in fisier
+  } catch (err) {
+    console.error(err)
+  }
+
+  response.json('Car was updated succesfully');
 });
 
 api.delete('/cars/:index', function (request, response) {
