@@ -1,4 +1,4 @@
-var app = new Vue({
+let app = new Vue({
   el: '#hamming-encoder',
   data: {
     dataBits: [],
@@ -12,8 +12,8 @@ var app = new Vue({
     initDataBits: function () {
       this.dataBits = [];
 
-      for (var i = 0; i < this.numberOfDataBits; i++) {
-        var bit = { data: null };
+      for (let i = 0; i < this.numberOfDataBits; i++) {
+        let bit = { data: null };
         this.dataBits.push(bit);
       }
     },

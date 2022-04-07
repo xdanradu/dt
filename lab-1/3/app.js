@@ -1,4 +1,4 @@
-var counter = 0;
+let counter = 0;
 
 function printValue(divId, value) {
   document.getElementById(divId).innerHTML = value;

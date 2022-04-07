@@ -2,14 +2,16 @@ function run() {
   new Vue({
     el: '#app',
     data: {
-      users: [],
-      usersService: null
+      users: []
     },
     created: function () {
-      this.usersService = users();
-      this.usersService.get().then(response => (this.users = response.data));
+      this.getUsers().then(response => (this.users = response.data));
     },
-    methods: {}
+    methods: {
+      getUsers: function() {
+          return axios.get('http://localhost:3000/users');
+      }
+    }
   });
 }
 
