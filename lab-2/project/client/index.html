@@ -33,7 +33,7 @@
         <div class="">
           <a :href="'details.html?id='+car.id">{{ car.name }}</a>
           <span class=""><i>{{ car.price }}</i></span>
-            <img v-bind:src="'http://127.0.0.1:8080/' + car.img"/>
+            <img v-bind:src="'http://127.0.0.1:4300/' + car.img"/>
           <button v-on:click="deleteCar(car.id)">Delete</button>
           <a :href="'update.html?id='+car.id" target="_self">Update</a>
         </div>
