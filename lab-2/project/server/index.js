@@ -48,6 +48,7 @@ api.post('/cars', function (request, response) {
 api.delete('/cars/:index', function (request, response) {
   // delete din fisier pe baza unui id
   // cars.splice(request.params.index, 1);
+  console.log(request.params.index);
   response.json('User with index ' + request.params.index + ' was deleted');
 });
 
