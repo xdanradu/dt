@@ -29,8 +29,10 @@
         </div>
 
         <div class="empty" v-for="user in users">
-            <p>{{user.id}} {{ user.email }} <button v-on:click="deleteUser(user.id)">X</button>
-
+            <p>
+                <a :href="'details.html?id='+user.id">
+                    {{user.id}} {{ user.email }} </a>
+                <button v-on:click="deleteUser(user.id)">X</button>
             </p>
         </div>
 

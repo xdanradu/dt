@@ -1,0 +1,23 @@
+<html>
+
+<head>
+    <script type="text/javascript" src="vue.js"></script>
+    <script type="text/javascript" src="axios.js"></script>
+</head>
+
+<body>
+    <a href="index.html">Home</a>
+    <div id="details">
+        <h1>Detalii pentru userul cu id-ul: {{ id }}</h1>
+        <div class="container">
+            <div class="custom"></div>
+            <div class="label">Email:</div>
+            <div class="value">{{user.email}}</div>
+        </div>
+        <div class="label">Password:</div>
+        <div class="value">{{user.password}}</div>
+    </div>
+    <script src="src/details.js"></script>
+</body>
+
+</html>
