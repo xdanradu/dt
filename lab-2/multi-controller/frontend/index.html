@@ -1,0 +1,23 @@
+<html>
+<head>
+    <link rel="stylesheet" href="style.css" />
+    <script src="vue.js"></script>
+    <script src="app.js"></script>
+    <script src="netflix-controller.js"></script>
+</head>
+<body>
+    <div id="login-component" class="login-component">
+        <p id="message"></p>
+        <input v-model="user" type="text" placeholder="Username"/>{{user}}
+        <input v-model="pass" type="password" placeholder="Password"/>{{pass}}
+        <button v-on:click="login()">Login</button>
+        <h1>{{ message }}</h1>
+    </div>
+
+    <div id="netflix-component" class="netflix-component">
+       <h2 v-for="movie in movies">
+            {{movie.title}}
+       </h2>
+    </div>
+</body>
+</html>
