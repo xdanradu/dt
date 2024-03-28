@@ -14,8 +14,10 @@ function run() {
             login: function() {
                 if (this.user === 'root' && this.pass === 'pass') {
                     this.message  = 'ALLOW';
+                    location.href = "update.html";
                 } else {
                     this.message = 'DENY';
+                    location.href = "deny.html";
                 }
             }
         }
@@ -27,35 +29,15 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
+class User {
+    name = '';
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*function login() {
-    let user = {
-        name: '', 
-        pass: ''
-    };
-    const username = document.getElementById('user');
-    const password = document.getElementById('pass');
-    user = {
-        name: username.value, pass: password.value
-    };
-    if (user.name === 'root' && user.pass === 'pass') {
-        document.getElementById('message').innerText = 'ALLOW';
-    } else {
-        document.getElementById('message').innerText = 'DENY';
+    constructor(n) {
+        this.name = n;
     }
-}*/
+}
+
+let u1 = new User('root');
+
+console.log(typeof u1);
+
