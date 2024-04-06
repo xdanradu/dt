@@ -1,0 +1,40 @@
+<html>
+<head>
+    <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+    <div class="card" id="login-component">
+        <h3>HTTP API</h3>
+        {{username}}
+        <input v-model="username" type="text"/>
+        <button v-on:click="login()">Login</button>
+        <div>{{ status }}</div>
+    </div>
+
+    <div class="card" id="cars-component">
+        <h3>HTTP API</h3>
+        <div class="car" v-for="car of cars">
+            {{car.name}} {{car.color}} <button>X</button>
+        </div>
+    </div>
+
+    <div class="card chat" id="chat-component">
+        <h3>WS API ({{ socketId }})</h3>
+        <p v-for="message of messages">
+            {{ message }}
+        </p>
+        <input v-model="message"><button v-on:click="send()">Send</button>
+    </div>
+
+    <!-- External libraries -->
+    <script src="libs/axios.js"></script>
+    <script src="libs/vue.js"></script>
+    <script src="libs/socket.io.js"></script>
+    
+    <!-- Custom code -->
+    <script src="control/login-component.js"></script>
+    <script src="control/cars-component.js"></script>
+    <script src="control/chat-component.js"></script>
+</body>
+</html>
