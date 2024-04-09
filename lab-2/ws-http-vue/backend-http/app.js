@@ -1,7 +1,7 @@
 let express = require('express');
 let cors = require('cors');
 const fs = require('fs');
-const carsFilepath = './cars.json';
+const carsFilepath = './movies.json';
 let api = express();
 api.use(cors());
 
@@ -17,22 +17,22 @@ api.get('/', function (request, response) {
   response.json('NodeJS REST API');
 });
 
-api.get('/cars', function (request, response) {
+api.get('/movies', function (request, response) {
   response.json(getCars());
 });
 
-api.get('/cars/:id', function (request, response) {
+api.get('/movies/:id', function (request, response) {
   let car = getCarById(request.params.id);
   if (car) response.json(car);
   response.json('not found');
 });
 
-api.put('/cars', function (request, response) {
+api.put('/movies', function (request, response) {
   saveCar(request.body);
   response.json('User was saved succesfully');
 });
 
-api.post('/cars', function (request, response) {
+api.post('/movies', function (request, response) {
   // in request o sa-mi vina un obiect de tip car care o sa aiba un anumit id
   // console.log(request.body);//un obiect de tipul car actualizat pe client
   // citim cars din fisier pe baza id-ului primit de la client
@@ -56,7 +56,7 @@ api.post('/cars', function (request, response) {
   response.json('Car was updated succesfully');
 });
 
-api.delete('/cars/:index', function (request, response) {
+api.delete('/movies/:index', function (request, response) {
   // delete din fisier pe baza unui id
   // cars.splice(request.params.index, 1);
   console.log(request.params.index);

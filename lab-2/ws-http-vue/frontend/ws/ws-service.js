@@ -1,6 +1,5 @@
-const subject = new rxjs.BehaviorSubject(123);
+const globalMessages$ = new rxjs.BehaviorSubject([]);
 
-var globalMessages = [];
 var socket = null;
 try {
     socket = io.connect('localhost:8000');
@@ -10,7 +9,7 @@ try {
     });
   
     socket.on('message-from-server', function (entry) {
-        globalMessages.push(entry);
+      globalMessages$.next([...globalMessages$.getValue(), entry]);
     });
   } catch (err) {
     console.log('ERROR: socket.io encountered a problem:\n', err);

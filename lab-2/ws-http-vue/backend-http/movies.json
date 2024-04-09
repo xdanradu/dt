@@ -1,0 +1,5 @@
+[
+    {"id": 1,  "name": "Lord Of The Rings", "img":"movies/lotr.jpg"},
+    {"id": 2, "name": "The Dark Knight", "img":"movies/dark-knight.jpg"},
+    {"id": 3, "name": "The Shawshank Redemption", "img":"movies/shawshank.jpg"}
+]

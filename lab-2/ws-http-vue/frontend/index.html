@@ -12,10 +12,14 @@
         <div>{{ status }}</div>
     </div>
 
-    <div class="card" id="cars-component">
-        <h3>HTTP API</h3>
-        <div class="car" v-for="car of cars">
-            {{car.name}} {{car.color}} <button>X</button>
+    <div class="card" id="movies-component">
+        <h3>HTTP movies API</h3>
+        <div class="movies-wrapper">
+            <div class="movie" v-for="movie of movies">
+                <img v-bind:src="`http://localhost:4200/${movie.img}`"/>
+                <!--{{movie.name}} {{movie.color}} -->
+                <!--<button>X</button>-->
+            </div>
         </div>
     </div>
 
@@ -37,7 +41,7 @@
     <script src="ws/ws-service.js"></script>
 
     <script src="control/login-component.js"></script>
-    <script src="control/cars-component.js"></script>
+    <script src="control/movies-component.js"></script>
     <script src="control/chat-component.js"></script>
 </body>
 </html>
