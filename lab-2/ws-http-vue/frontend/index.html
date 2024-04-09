@@ -20,7 +20,7 @@
     </div>
 
     <div class="card chat" id="chat-component">
-        <h3>WS API ({{ socketId }})</h3>
+        <h3>WS API (Socket id: {{ socketId }})</h3>
         <p v-for="message of messages">
             {{ message }}
         </p>
@@ -31,8 +31,11 @@
     <script src="libs/axios.js"></script>
     <script src="libs/vue.js"></script>
     <script src="libs/socket.io.js"></script>
+    <script src="libs/rxjs.js"></script>
     
     <!-- Custom code -->
+    <script src="ws/ws-service.js"></script>
+
     <script src="control/login-component.js"></script>
     <script src="control/cars-component.js"></script>
     <script src="control/chat-component.js"></script>
