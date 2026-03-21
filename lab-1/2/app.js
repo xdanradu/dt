@@ -1,4 +1,4 @@
-document.getElementById('n').addEventListener('input ', inputSum);
+document.getElementById('n').addEventListener('input', inputSum);
 
 function inputSum() {
   let inputNumber = parseInt(document.getElementById('n').value);
