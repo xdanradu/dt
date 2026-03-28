@@ -29,6 +29,15 @@ The Part 3 proxy is **bidirectional**: it forwards client packets to the server 
 
 ## Running
 
+### Free ports before starting
+
+If ports 4000 or 5000 are already in use, kill the owning processes first (PowerShell):
+
+```powershell
+Get-NetUDPEndpoint -LocalPort 4000 -ErrorAction SilentlyContinue | ForEach-Object { Stop-Process -Id $_.OwningProcess -Force }
+Get-NetUDPEndpoint -LocalPort 5000 -ErrorAction SilentlyContinue | ForEach-Object { Stop-Process -Id $_.OwningProcess -Force }
+```
+
 ### Quick start (single terminal)
 
 ```bash
@@ -56,3 +65,4 @@ node client.js
 2. Increase the proxy drop rate to 50 % and note how many retransmissions occur.
 3. **Challenge:** Change the timeout from 2 s to 500 ms and observe the difference.
 4. **Bonus:** Extend the client to send multiple messages in sequence (e.g., an array of strings).
+
