@@ -1,0 +1,159 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+}
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: #fff;
+    color: #333;
+    padding: 30px;
+}
+
+.container {
+    max-width: 700px;
+    margin: auto;
+}
+
+h2 {
+    font-size: 22px;
+    color: #222;
+    margin-bottom: 4px;
+}
+
+.sub {
+    color: #999;
+    font-size: 13px;
+    margin-bottom: 24px;
+}
+
+.upload-area {
+    border: 2px dashed #ddd;
+    border-radius: 12px;
+    padding: 40px;
+    text-align: center;
+    cursor: pointer;
+    transition: border-color 0.2s;
+    margin-bottom: 20px;
+}
+
+.upload-area:hover {
+    border-color: #667eea;
+}
+
+.upload-area.has-file {
+    border-color: #2ecc71;
+    border-style: solid;
+}
+
+.upload-area .icon {
+    font-size: 36px;
+    margin-bottom: 8px;
+}
+
+.upload-area .label {
+    color: #888;
+    font-size: 14px;
+}
+
+.upload-area .filename {
+    color: #2ecc71;
+    font-weight: bold;
+    font-size: 16px;
+    margin-top: 8px;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+button {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    border: none;
+    padding: 12px 28px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+button:hover {
+    transform: scale(1.03);
+}
+
+button:disabled {
+    opacity: 0.5;
+    cursor: default;
+    transform: none;
+}
+
+.result {
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 20px;
+    margin-top: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.result h3 {
+    font-size: 14px;
+    color: #667eea;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+}
+
+.detail-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 14px;
+}
+
+.detail-row .label {
+    color: #999;
+}
+
+.detail-row .value {
+    font-family: 'Consolas', monospace;
+    color: #333;
+}
+
+.content-type-box {
+    background: #f0f5ff;
+    border-left: 4px solid #667eea;
+    padding: 12px 16px;
+    border-radius: 0 8px 8px 0;
+    font-family: 'Consolas', monospace;
+    font-size: 12px;
+    word-break: break-all;
+    margin-top: 12px;
+    color: #555;
+}
+
+.buffer-preview {
+    background: #f9f9f9;
+    border: 1px solid #eee;
+    padding: 12px;
+    border-radius: 8px;
+    font-family: 'Consolas', monospace;
+    font-size: 12px;
+    margin-top: 12px;
+    white-space: pre-wrap;
+    word-break: break-all;
+    max-height: 150px;
+    overflow-y: auto;
+    color: #666;
+}
+
+.note {
+    background: #fff8ee;
+    border-left: 4px solid #e67e22;
+    padding: 12px 16px;
+    border-radius: 0 8px 8px 0;
+    font-size: 13px;
+    color: #666;
+    margin-top: 16px;
+}

@@ -1,0 +1,139 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+}
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: #fff;
+    color: #333;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+}
+
+.container {
+    width: 520px;
+}
+
+h2 {
+    font-size: 22px;
+    color: #222;
+    margin-bottom: 4px;
+}
+
+.sub {
+    color: #999;
+    font-size: 13px;
+    margin-bottom: 24px;
+}
+
+.question {
+    font-size: 18px;
+    font-weight: bold;
+    color: #222;
+    margin-bottom: 24px;
+    padding: 16px;
+    background: #fafafa;
+    border-radius: 12px;
+    border: 1px solid #e0e0e0;
+    text-align: center;
+}
+
+.option {
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+    overflow: hidden;
+}
+
+.option:hover {
+    border-color: #667eea;
+}
+
+.option.selected {
+    border-color: #667eea;
+    border-width: 2px;
+}
+
+.option .bar {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    border-radius: 10px;
+    transition: width 0.4s ease;
+    z-index: 0;
+}
+
+.option .content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.option .label {
+    font-size: 15px;
+}
+
+.option .count {
+    font-family: 'Consolas', monospace;
+    font-size: 14px;
+    color: #888;
+}
+
+.option .pct {
+    font-weight: bold;
+    font-size: 16px;
+    min-width: 45px;
+    text-align: right;
+}
+
+.stats {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 16px;
+    font-size: 13px;
+    color: #999;
+}
+
+.bar-c0 {
+    background: rgba(231, 76, 60, 0.12);
+}
+
+.bar-c1 {
+    background: rgba(46, 204, 113, 0.12);
+}
+
+.bar-c2 {
+    background: rgba(52, 152, 219, 0.12);
+}
+
+.bar-c3 {
+    background: rgba(230, 126, 34, 0.12);
+}
+
+.pct-c0 {
+    color: #e74c3c;
+}
+
+.pct-c1 {
+    color: #2ecc71;
+}
+
+.pct-c2 {
+    color: #3498db;
+}
+
+.pct-c3 {
+    color: #e67e22;
+}

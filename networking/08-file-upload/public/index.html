@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Demo 8 — File Upload</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="app" class="container">
+        <h2>Demo 8: File Upload &amp; Content Types</h2>
+        <div class="sub">Upload a file and see how the browser encodes it as multipart/form-data</div>
+
+        <div class="upload-area" :class="{ 'has-file': selectedFile }" @click="triggerInput()">
+            <div class="icon">📁</div>
+            <div class="label" v-if="!selectedFile">Click to select a file</div>
+            <div class="filename" v-if="selectedFile">{{ selectedFile.name }}</div>
+        </div>
+        <input type="file" ref="fileInput" @change="onFileSelected($event)">
+
+        <button @click="upload()" :disabled="!selectedFile || uploading">
+            {{ uploading ? 'Uploading...' : 'Upload' }}
+        </button>
+
+        <div v-if="result" class="result">
+            <h3>Server Received</h3>
+            <div class="detail-row">
+                <span class="label">Filename</span>
+                <span class="value">{{ result.originalname }}</span>
+            </div>
+            <div class="detail-row">
+                <span class="label">MIME Type</span>
+                <span class="value">{{ result.mimetype }}</span>
+            </div>
+            <div class="detail-row">
+                <span class="label">Size</span>
+                <span class="value">{{ formatSize(result.size) }}</span>
+            </div>
+            <div class="detail-row">
+                <span class="label">Encoding</span>
+                <span class="value">{{ result.encoding }}</span>
+            </div>
+
+            <h3 style="margin-top: 16px;">Content-Type Header (sent by browser)</h3>
+            <div class="content-type-box">{{ result.contentType }}</div>
+
+            <h3 style="margin-top: 16px;">Raw Buffer Preview (first 200 bytes)</h3>
+            <div class="buffer-preview">{{ result.bufferPreview }}</div>
+
+            <div class="note">
+                Notice the Content-Type includes a "boundary" string. This boundary separates
+                different parts of the multipart body — it's how the server knows where the
+                file data starts and ends. Try uploading a .txt file vs a .png to see
+                the difference in the buffer preview.
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>

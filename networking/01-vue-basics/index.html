@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Demo 1 — Vue.js Reactivity</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="app" class="card">
+        <h2>Demo 1: Vue.js Reactivity</h2>
+        <div class="sub">Everything updates instantly — no page reload</div>
+
+        <input v-model="message" placeholder="Type anything here...">
+        <div class="counter">{{ message.length }} characters</div>
+
+        <div class="box empty" v-if="message === ''">Start typing to see reactivity in action...</div>
+        <div class="box magic" v-else-if="message === '123'">Secret code accepted!</div>
+        <div class="box ok" v-else>
+            <div>{{ message }}</div>
+            <div class="reversed">Reversed: {{ message.split('').reverse().join('') }}</div>
+            <div class="upper">{{ message.toUpperCase() }}</div>
+        </div>
+
+        <button @click="save()">Save to history</button>
+
+        <div class="history" v-if="history.length">
+            <h3>Saved messages ({{ history.length }})</h3>
+            <span class="pill" v-for="h in history">{{ h }}</span>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>

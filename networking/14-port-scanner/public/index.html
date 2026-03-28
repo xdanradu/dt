@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Demo 14 — Port Scanner</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="app" class="container">
+        <h2>Demo 14: Port Scanner (localhost)</h2>
+        <div class="sub">See which services are running on your machine right now</div>
+
+        <button @click="scan()" :disabled="scanning">
+            {{ scanning ? 'Scanning...' : 'Scan Ports' }}
+        </button>
+
+        <div v-if="scanning" class="loading">Scanning ports on 127.0.0.1...</div>
+
+        <div v-if="results.length && !scanning">
+            <div class="summary">
+                <div class="stat">
+                    <div class="num" style="color: #27ae60">{{ openCount }}</div>
+                    <div class="label">Open</div>
+                </div>
+                <div class="stat">
+                    <div class="num" style="color: #ccc">{{ closedCount }}</div>
+                    <div class="label">Closed</div>
+                </div>
+                <div class="stat">
+                    <div class="num" style="color: #667eea">{{ results.length }}</div>
+                    <div class="label">Scanned</div>
+                </div>
+            </div>
+
+            <div class="port-row" v-for="r in results">
+                <span class="port-number" :style="{ color: r.open ? '#27ae60' : '#ccc' }">:{{ r.port }}</span>
+                <span class="port-service">{{ r.service }}</span>
+                <span class="port-status" :class="r.open ? 'status-open' : 'status-closed'">
+                    {{ r.open ? 'OPEN' : 'closed' }}
+                </span>
+            </div>
+
+            <div class="scan-time">Scan completed in {{ scanTime }}ms</div>
+
+            <div class="note">
+                A port is "open" when a program is listening for connections on it.
+                Try starting one of the other demos (e.g. Demo 2 on port 3000) and re-scan
+                to see it appear as open. Port 3009 (this demo) will always show as open.
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>

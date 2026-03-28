@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Demo 9 — Live Mouse Tracker</title>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="app">
+        <div class="header">
+            <h2>Demo 9: Live Mouse Tracker</h2>
+            <span class="online">{{ onlineCount }} online</span>
+        </div>
+
+        <div class="canvas-area" @mousemove="onMouseMove($event)">
+            <div v-for="(cur, name) in cursors" class="cursor-dot"
+                :style="{ left: cur.x + '%', top: cur.y + '%', background: cur.color }">
+            </div>
+            <div v-for="(cur, name) in cursors" class="cursor-label"
+                :style="{ left: cur.x + '%', top: cur.y + '%', color: cur.color }">
+                {{ name }}
+            </div>
+        </div>
+
+        <div class="hint">Move your mouse — open this page in another tab to see multiple cursors</div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>

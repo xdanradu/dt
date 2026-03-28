@@ -1,0 +1,173 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+}
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: #fff;
+    color: #333;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+}
+
+.container {
+    width: 600px;
+}
+
+h2 {
+    font-size: 22px;
+    color: #222;
+    margin-bottom: 4px;
+}
+
+.sub {
+    color: #999;
+    font-size: 13px;
+    margin-bottom: 24px;
+}
+
+.slider-section {
+    background: #fafafa;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 20px;
+}
+
+.slider-section label {
+    font-size: 14px;
+    color: #666;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.slider-section input[type="range"] {
+    width: 100%;
+    margin-bottom: 8px;
+}
+
+.delay-display {
+    font-size: 36px;
+    font-weight: bold;
+    font-family: 'Consolas', monospace;
+    text-align: center;
+    margin: 8px 0;
+}
+
+.scenario {
+    text-align: center;
+    font-size: 14px;
+    color: #888;
+    font-style: italic;
+}
+
+.presets {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.presets span {
+    background: #f0f0f0;
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: background 0.15s;
+}
+
+.presets span:hover {
+    background: #e0e0e0;
+}
+
+button {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    border: none;
+    padding: 14px 28px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+    transition: transform 0.15s;
+    margin-bottom: 20px;
+}
+
+button:hover {
+    transform: scale(1.03);
+}
+
+button:disabled {
+    opacity: 0.5;
+    transform: none;
+}
+
+.result {
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.result .big {
+    font-size: 48px;
+    font-weight: bold;
+    font-family: 'Consolas', monospace;
+    text-align: center;
+    margin: 12px 0;
+}
+
+.result .label {
+    text-align: center;
+    color: #999;
+    font-size: 14px;
+}
+
+.history {
+    margin-top: 16px;
+}
+
+.history h3 {
+    font-size: 13px;
+    color: #999;
+    margin-bottom: 8px;
+}
+
+.history-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 0;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 13px;
+}
+
+.history-row .ms {
+    font-family: 'Consolas', monospace;
+    font-weight: bold;
+}
+
+.waiting {
+    text-align: center;
+    color: #e67e22;
+    font-size: 16px;
+    padding: 20px;
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.4;
+    }
+}

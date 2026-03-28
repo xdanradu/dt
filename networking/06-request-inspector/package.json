@@ -1,0 +1,7 @@
+{
+    "name": "request-inspector",
+    "private": true,
+    "dependencies": {
+        "express": "^4.21.0"
+    }
+}

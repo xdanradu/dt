@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Monitor Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #0f172a;
+            color: #e2e8f0;
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        header h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #f8fafc;
+        }
+
+        header p {
+            color: #94a3b8;
+            margin-top: .3rem;
+        }
+
+        #status {
+            display: inline-block;
+            padding: .25rem .75rem;
+            border-radius: 999px;
+            font-size: .85rem;
+            margin-top: .5rem;
+            background: #1e293b;
+            color: #94a3b8;
+        }
+
+        #status.online {
+            background: #064e3b;
+            color: #6ee7b7;
+        }
+
+        #grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.25rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: #1e293b;
+            border-radius: 12px;
+            padding: 1.25rem;
+            border: 1px solid #334155;
+            transition: border-color .3s, box-shadow .3s;
+        }
+
+        .card:hover {
+            border-color: #3b82f6;
+            box-shadow: 0 0 20px rgba(59, 130, 246, .15);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .card-header h2 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #f1f5f9;
+        }
+
+        .badge {
+            font-size: .75rem;
+            padding: .2rem .6rem;
+            border-radius: 999px;
+            background: #064e3b;
+            color: #6ee7b7;
+        }
+
+        .badge.stale {
+            background: #78350f;
+            color: #fcd34d;
+        }
+
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            padding: .4rem 0;
+            font-size: .9rem;
+        }
+
+        .stat-label {
+            color: #94a3b8;
+        }
+
+        .stat-value {
+            color: #e2e8f0;
+            font-weight: 500;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .cpu-bar-bg {
+            width: 100%;
+            height: 8px;
+            border-radius: 4px;
+            background: #334155;
+            margin-top: .75rem;
+            overflow: hidden;
+        }
+
+        .cpu-bar {
+            height: 100%;
+            border-radius: 4px;
+            transition: width .5s ease, background .5s ease;
+        }
+
+        .empty {
+            text-align: center;
+            color: #64748b;
+            padding: 4rem 1rem;
+            grid-column: 1 / -1;
+        }
+
+        .empty p {
+            font-size: 1.1rem;
+        }
+
+        .empty code {
+            background: #1e293b;
+            padding: .2rem .5rem;
+            border-radius: 4px;
+            font-size: .95rem;
+            color: #94a3b8;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>System Monitor Dashboard</h1>
+        <p>Connected student agents</p>
+        <div id="status">checking…</div>
+    </header>
+    <div id="grid"></div>
+
+    <script>
+        const grid = document.getElementById('grid');
+        const status = document.getElementById('status');
+
+        // Keep the latest data with timestamps so we can tick "ago" locally
+        let clients = [];      // array from server
+        let receivedAt = 0;    // Date.now() when last SSE message arrived
+
+        function cpuColor(pct) {
+            if (pct < 40) return '#22c55e';
+            if (pct < 70) return '#eab308';
+            return '#ef4444';
+        }
+
+        function fmtUptime(sec) {
+            const h = Math.floor(sec / 3600);
+            const m = Math.floor((sec % 3600) / 60);
+            const s = sec % 60;
+            return h > 0 ? `${h}h ${m}m` : m > 0 ? `${m}m ${s}s` : `${s}s`;
+        }
+
+        function render() {
+            if (clients.length === 0) {
+                grid.innerHTML = `<div class="empty"><p>No agents connected yet.</p><p style="margin-top:.5rem">Students run: <code>node agent.js &lt;server-ip&gt;</code></p></div>`;
+                status.textContent = '0 agents';
+                status.className = '';
+                return;
+            }
+
+            status.textContent = `${clients.length} agent${clients.length > 1 ? 's' : ''} online`;
+            status.className = 'online';
+
+            // Compute live "ago" by adding time elapsed since last SSE push
+            const elapsed = Math.round((Date.now() - receivedAt) / 1000);
+
+            grid.innerHTML = clients.map(c => {
+                const ago = c.ago + elapsed;
+                return `
+        <div class="card${ago > 8 ? ' stale-card' : ''}">
+            <div class="card-header">
+                <h2>${esc(c.hostname)}</h2>
+                <span class="badge ${ago > 8 ? 'stale' : ''}">${ago}s ago</span>
+            </div>
+            <div class="stat-row"><span class="stat-label">IP</span><span class="stat-value">${esc(c.ip)}</span></div>
+            <div class="stat-row"><span class="stat-label">CPU</span><span class="stat-value">${c.cpu}%</span></div>
+            <div class="stat-row"><span class="stat-label">Platform</span><span class="stat-value">${esc(c.platform)}</span></div>
+            <div class="stat-row"><span class="stat-label">Uptime</span><span class="stat-value">${fmtUptime(c.uptime)}</span></div>
+            <div class="cpu-bar-bg"><div class="cpu-bar" style="width:${c.cpu}%;background:${cpuColor(c.cpu)}"></div></div>
+        </div>`;
+            }).join('');
+        }
+
+        function esc(s) {
+            const d = document.createElement('div');
+            d.textContent = s;
+            return d.innerHTML;
+        }
+
+        // Tick the "ago" badges every second so staleness is visible immediately
+        setInterval(render, 1000);
+
+        const evtSource = new EventSource('/api/events');
+        evtSource.onmessage = (e) => {
+            clients = JSON.parse(e.data);
+            receivedAt = Date.now();
+            render();
+        };
+        evtSource.onerror = () => {
+            status.textContent = 'connection lost';
+            status.className = '';
+        };
+    </script>
+</body>
+
+</html>

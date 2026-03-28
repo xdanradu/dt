@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Demo 11 — Live Voting</title>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="app" class="container">
+        <h2>Demo 11: Live Voting</h2>
+        <div class="sub">Click an option to vote — results update in real-time for everyone</div>
+
+        <div class="question">{{ question }}</div>
+
+        <div v-for="(opt, i) in options" class="option" :class="{ selected: myVote === i }" @click="vote(i)">
+            <div class="bar" :class="'bar-c' + i" :style="{ width: pct(i) + '%' }"></div>
+            <div class="content">
+                <span class="label">{{ opt }}</span>
+                <span class="pct" :class="'pct-c' + i">{{ pct(i) }}%</span>
+                <span class="count">({{ votes[i] }})</span>
+            </div>
+        </div>
+
+        <div class="stats">
+            <span>{{ totalVoters }} voters</span>
+            <span>{{ onlineCount }} online</span>
+            <span>{{ totalVotes() }} total votes</span>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>

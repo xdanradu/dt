@@ -1,0 +1,7 @@
+{
+    "name": "dns-lookup",
+    "private": true,
+    "dependencies": {
+        "express": "^4.21.0"
+    }
+}

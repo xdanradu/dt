@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Demo 4 — HTTP Polling vs WebSocket Push</title>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="app" class="layout">
+        <!-- HTTP Polling Side -->
+        <div class="col">
+            <div class="panel">
+                <h2>HTTP Polling</h2>
+                <div class="center"><span class="tag http">Client asks every {{ pollInterval }}ms</span></div>
+
+                <div class="big-number http" :class="{ flash: httpFlash }">{{ httpCounter }}</div>
+
+                <div class="stat"><span class="label">Total HTTP requests sent</span><span class="val">{{
+                        httpRequestCount }}</span></div>
+                <div class="stat"><span class="label">Network overhead</span><span class="val">~{{ httpRequestCount *
+                        200 }} bytes</span></div>
+                <div class="stat"><span class="label">Update delay</span><span class="val">0 – {{ pollInterval
+                        }}ms</span></div>
+
+                <button class="toggle" :class="{ active: polling }" @click="togglePolling()">
+                    {{ polling ? 'Stop polling' : 'Start polling' }}
+                </button>
+            </div>
+        </div>
+
+        <div class="vs">VS</div>
+
+        <!-- WebSocket Side -->
+        <div class="col">
+            <div class="panel">
+                <h2>WebSocket Push</h2>
+                <div class="center"><span class="tag ws">Server pushes instantly</span></div>
+
+                <div class="big-number ws" :class="{ flash: wsFlash }">{{ wsCounter }}</div>
+
+                <div class="stat"><span class="label">Total WS messages received</span><span class="val">{{
+                        wsMessageCount }}</span></div>
+                <div class="stat"><span class="label">Network overhead</span><span class="val">~{{ wsMessageCount * 20
+                        }} bytes</span></div>
+                <div class="stat"><span class="label">Update delay</span><span class="val">&lt; 5ms</span></div>
+
+                <button @click="increment()">Increment Counter (+1)</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>

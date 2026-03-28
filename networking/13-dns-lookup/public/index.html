@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Demo 13 — DNS Lookup</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="app" class="container">
+        <h2>Demo 13: DNS Lookup Visualizer</h2>
+        <div class="sub">Type a domain to see its DNS records — the "phone book" behind every URL</div>
+
+        <div class="input-row">
+            <input v-model="domain" placeholder="e.g. google.com" @keyup.enter="lookup()">
+            <button @click="lookup()">Lookup</button>
+        </div>
+
+        <div class="presets">
+            <span v-for="d in presetDomains" @click="tryDomain(d)">{{ d }}</span>
+        </div>
+
+        <div v-if="loading" class="loading">Resolving DNS records...</div>
+
+        <div v-if="result">
+            <div v-for="type in ['A', 'AAAA', 'CNAME', 'MX', 'NS', 'TXT']" class="record-section">
+                <h3>
+                    <span class="record-type" :class="'type-' + type">{{ type }}</span>
+                    <span class="record-desc">{{ typeInfo[type] }}</span>
+                </h3>
+                <div v-if="hasRecords(type)">
+                    <div class="record-value" v-for="r in result.records[type]">{{ formatRecord(type, r) }}</div>
+                </div>
+                <div v-else class="empty">No {{ type }} records found</div>
+            </div>
+
+            <div class="lookup-time">Lookup completed in {{ result.time }}ms</div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Demo 17 — Auth Flow</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="app" class="container">
+        <h2>Demo 17: Authentication Flow</h2>
+        <div class="sub">Login, cookies, sessions, protected routes, and authorization</div>
+
+        <!-- Login Form (shown when not logged in) -->
+        <div v-if="!loggedIn">
+            <div class="login-box">
+                <h3>Log In</h3>
+                <div class="credentials">
+                    admin/admin123 &nbsp; student/student123 &nbsp; guest/guest
+                </div>
+                <div class="quick-logins">
+                    <div class="quick-btn" @click="quickLogin('admin', 'admin123')">Admin</div>
+                    <div class="quick-btn" @click="quickLogin('student', 'student123')">Student</div>
+                    <div class="quick-btn" @click="quickLogin('guest', 'guest')">Guest</div>
+                </div>
+                <div class="form-group">
+                    <label>Username</label>
+                    <input v-model="username" placeholder="Enter username" @keyup.enter="login()">
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input v-model="password" type="password" placeholder="Enter password" @keyup.enter="login()">
+                </div>
+                <button class="login-btn" @click="login()">Log In</button>
+                <div v-if="loginError" class="error-msg">{{ loginError }}</div>
+            </div>
+        </div>
+
+        <!-- Logged-in UI -->
+        <div v-if="loggedIn">
+            <div class="user-bar">
+                <div class="avatar">{{ user.name.charAt(0) }}</div>
+                <div class="user-info">
+                    <div>
+                        <span class="user-name">{{ user.name }}</span>
+                        <span class="user-role" :class="'role-' + user.role">{{ user.role }}</span>
+                    </div>
+                    <div class="user-time">Logged in at {{ user.loginTime }}</div>
+                </div>
+                <button class="logout-btn" @click="logout()">Log Out</button>
+            </div>
+
+            <!-- Login flow explanation -->
+            <div v-if="loginSteps" class="steps">
+                <h3>What just happened:</h3>
+                <div class="step" v-for="(text, key) in loginSteps">
+                    <span class="step-num">{{ key.replace('step', '') }}</span>
+                    <span>{{ text }}</span>
+                </div>
+            </div>
+
+            <!-- Action buttons to test different endpoints -->
+            <div class="actions">
+                <div class="action-btn" @click="fetchProfile()">
+                    <div class="icon">👤</div>
+                    <div class="label">GET /api/profile<br>(requires login)</div>
+                </div>
+                <div class="action-btn" @click="fetchAdmin()">
+                    <div class="icon">🔒</div>
+                    <div class="label">GET /api/admin<br>(requires admin role)</div>
+                </div>
+                <div class="action-btn" @click="checkSession()">
+                    <div class="icon">🍪</div>
+                    <div class="label">GET /api/session-info<br>(check cookie state)</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Buttons available even when logged out -->
+        <div v-if="!loggedIn" class="actions" style="margin-top: 16px">
+            <div class="action-btn" @click="fetchProfile()">
+                <div class="icon">👤</div>
+                <div class="label">GET /api/profile<br>(will get 401)</div>
+            </div>
+            <div class="action-btn" @click="checkSession()">
+                <div class="icon">🍪</div>
+                <div class="label">GET /api/session-info<br>(check cookies)</div>
+            </div>
+        </div>
+
+        <!-- Server Response -->
+        <div v-if="lastResponse" class="response">
+            <div class="response-header">
+                <span class="response-status" :class="statusClass()">{{ lastStatus }}</span>
+                <span>{{ lastEndpoint }}</span>
+            </div>
+            <div class="response-body">{{ formatJson(lastResponse) }}</div>
+        </div>
+
+        <div class="note">
+            <strong>Authentication</strong> = "Who are you?" (login verifies identity).<br>
+            <strong>Authorization</strong> = "What can you do?" (role check for admin endpoint).<br>
+            The session token is stored as an <code>httpOnly</code> cookie — JavaScript can't read it,
+            which prevents XSS attacks from stealing tokens. Open DevTools → Application → Cookies
+            to see the <code>session_token</code> cookie appear after login.
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>

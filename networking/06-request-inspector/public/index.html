@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Demo 6 — Request Inspector</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="app" class="container">
+        <h2>Demo 6: HTTP Request Inspector</h2>
+        <div class="sub">See what your browser sends behind the scenes with every HTTP request</div>
+
+        <div v-if="info">
+            <div class="section">
+                <h3>Request Line</h3>
+                <div class="meta">{{ info.method }} {{ info.url }} HTTP/{{ info.httpVersion }}</div>
+            </div>
+
+            <div class="section">
+                <h3>Your IP Address</h3>
+                <div class="meta">{{ info.ip }}</div>
+            </div>
+
+            <div class="section">
+                <h3>Headers Sent by Your Browser ({{ Object.keys(info.headers).length }})</h3>
+                <div class="header-row" v-for="(value, name) in info.headers">
+                    <span class="header-name">{{ name }}:</span>
+                    <span class="header-value">{{ value }}</span>
+                </div>
+            </div>
+
+            <div class="note">
+                Your browser sent all these headers automatically — you didn't type any of them.
+                Try opening this page in a different browser and compare the User-Agent header.
+            </div>
+        </div>
+
+        <button @click="inspect()">Refresh</button>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>

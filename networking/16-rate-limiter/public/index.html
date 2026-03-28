@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Demo 16 — Rate Limiter</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="app" class="container">
+        <h2>Demo 16: Rate Limiter</h2>
+        <div class="sub">Spam the button until the server blocks you with 429 Too Many Requests</div>
+
+        <div class="config-bar">
+            <label>Limit:</label>
+            <input type="number" v-model.number="maxRequests" min="1" max="100" @change="updateConfig()">
+            <span>requests per</span>
+            <select v-model.number="windowSec" @change="updateConfig()">
+                <option :value="10">10s</option>
+                <option :value="30">30s</option>
+                <option :value="60">1 min</option>
+                <option :value="120">2 min</option>
+            </select>
+        </div>
+
+        <div class="quota-bar">
+            <div class="quota-fill" :style="{ width: quotaPct + '%', background: quotaColor }"></div>
+            <div class="quota-label">
+                {{ used }} / {{ maxRequests }} used
+                <template v-if="blocked"> — retry in {{ retryAfter }}s</template>
+            </div>
+        </div>
+
+        <div class="actions">
+            <button class="btn-send" :class="{ blocked: blocked }" @click="sendRequest()">
+                {{ blocked ? '🚫 Blocked' : 'Send Request' }}
+            </button>
+            <button class="btn-spam" @click="spam()">Spam 8x</button>
+            <button class="btn-reset" @click="resetLimits()">Reset Limits</button>
+        </div>
+
+        <div class="log">
+            <div class="log-header">Request Log</div>
+            <div class="log-list">
+                <div class="log-entry" v-for="entry in log">
+                    <span class="log-time">{{ entry.time }}</span>
+                    <span class="log-status" :class="'status-' + entry.status">{{ entry.status }}</span>
+                    <span class="log-msg">{{ entry.message }}</span>
+                    <span class="log-remaining">{{ entry.remaining }} left</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="note">
+            Rate limiting protects servers from abuse. The server tracks requests per IP
+            and returns <code>429 Too Many Requests</code> when the limit is exceeded.
+            Standard headers (<code>X-RateLimit-Remaining</code>, <code>Retry-After</code>)
+            tell the client when it can retry. Open DevTools → Network to see these headers.
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>

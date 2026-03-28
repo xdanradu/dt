@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Demo 7 — Status Code Playground</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="app" class="container">
+        <h2>Demo 7: HTTP Status Code Playground</h2>
+        <div class="sub">Enter any status code to see what it means and how the server responds</div>
+
+        <div class="input-row">
+            <input v-model="codeInput" placeholder="200" @keyup.enter="sendCode()" maxlength="3">
+            <button @click="sendCode()">Send</button>
+        </div>
+
+        <div class="quick-buttons">
+            <span v-for="c in quickCodes" @click="tryCode(c)">{{ c }}</span>
+        </div>
+
+        <div v-if="result" class="result">
+            <div class="code" :style="{ color: codeColor(result.code) }">{{ result.code }}</div>
+            <span class="category" :class="catClass(result.category)">{{ result.category }}</span>
+            <div class="desc">{{ result.description }}</div>
+        </div>
+
+        <div v-if="error" class="error-msg">{{ error }}</div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>

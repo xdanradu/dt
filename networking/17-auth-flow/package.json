@@ -1,0 +1,8 @@
+{
+    "name": "auth-flow",
+    "private": true,
+    "dependencies": {
+        "express": "^4.21.0",
+        "cookie-parser": "^1.4.6"
+    }
+}

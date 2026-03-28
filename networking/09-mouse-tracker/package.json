@@ -1,0 +1,8 @@
+{
+    "name": "live-mouse-tracker",
+    "private": true,
+    "dependencies": {
+        "express": "^4.21.0",
+        "socket.io": "^4.7.5"
+    }
+}

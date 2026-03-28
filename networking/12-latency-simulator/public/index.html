@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Demo 12 — Latency Simulator</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="app" class="container">
+        <h2>Demo 12: Latency Simulator</h2>
+        <div class="sub">Feel what different network latencies are like — from localhost to satellite</div>
+
+        <div class="slider-section">
+            <label>Simulated one-way delay:</label>
+            <input type="range" min="0" max="3000" step="5" v-model.number="delay">
+            <div class="delay-display" :style="{ color: delayColor }">{{ delay }}ms</div>
+            <div class="scenario">{{ scenario }}</div>
+        </div>
+
+        <div class="presets">
+            <span v-for="p in presets" @click="setPreset(p.value)">{{ p.label }}</span>
+        </div>
+
+        <button @click="ping()" :disabled="waiting">
+            {{ waiting ? 'Waiting for response...' : 'Send Request' }}
+        </button>
+
+        <div v-if="waiting" class="waiting">Waiting... you can feel the delay</div>
+
+        <div v-if="lastResult" class="result">
+            <div class="label">Round-trip time (measured)</div>
+            <div class="big" :style="{ color: delayColor }">{{ lastResult.rtt }}ms</div>
+            <div class="label">Requested delay: {{ lastResult.requested }}ms</div>
+        </div>
+
+        <div class="history" v-if="history.length">
+            <h3>Recent pings</h3>
+            <div class="history-row" v-for="h in history">
+                <span>Delay: {{ h.delay }}ms</span>
+                <span class="ms">RTT: {{ h.rtt }}ms</span>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>

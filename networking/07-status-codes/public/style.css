@@ -1,0 +1,144 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+}
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: #fff;
+    color: #333;
+    padding: 30px;
+}
+
+.container {
+    max-width: 700px;
+    margin: auto;
+}
+
+h2 {
+    font-size: 22px;
+    color: #222;
+    margin-bottom: 4px;
+}
+
+.sub {
+    color: #999;
+    font-size: 13px;
+    margin-bottom: 24px;
+}
+
+.input-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.input-row input {
+    width: 120px;
+    padding: 12px 16px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 20px;
+    font-family: 'Consolas', monospace;
+    text-align: center;
+    outline: none;
+    background: #fafafa;
+}
+
+.input-row input:focus {
+    border-color: #667eea;
+}
+
+.input-row button {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.input-row button:hover {
+    transform: scale(1.03);
+}
+
+.result {
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 16px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.result .code {
+    font-size: 48px;
+    font-weight: bold;
+    font-family: 'Consolas', monospace;
+    margin-bottom: 4px;
+}
+
+.result .category {
+    font-size: 12px;
+    padding: 3px 10px;
+    border-radius: 10px;
+    display: inline-block;
+    margin-bottom: 12px;
+}
+
+.cat-success {
+    background: #e8f8f0;
+    color: #27ae60;
+}
+
+.cat-redirect {
+    background: #e8eeff;
+    color: #667eea;
+}
+
+.cat-client {
+    background: #fff8ee;
+    color: #e67e22;
+}
+
+.cat-server {
+    background: #fef5f5;
+    color: #e74c3c;
+}
+
+.cat-info {
+    background: #f0f0f0;
+    color: #888;
+}
+
+.result .desc {
+    font-size: 15px;
+    color: #555;
+    line-height: 1.5;
+}
+
+.quick-buttons {
+    margin-bottom: 20px;
+}
+
+.quick-buttons span {
+    display: inline-block;
+    background: #f0f0f0;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    margin: 3px 4px;
+    cursor: pointer;
+    font-family: 'Consolas', monospace;
+    transition: background 0.15s;
+}
+
+.quick-buttons span:hover {
+    background: #e0e0e0;
+}
+
+.error-msg {
+    color: #e74c3c;
+    font-size: 14px;
+    margin-top: 8px;
+}

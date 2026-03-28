@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Demo 15 — SSE Live Stream</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="app" class="container">
+        <h2>Demo 15: Server-Sent Events (SSE)</h2>
+        <div class="sub">Server pushes live data — no polling, no WebSocket</div>
+
+        <div class="status-bar">
+            <span class="dot" :class="connected ? 'dot-connected' : 'dot-disconnected'"></span>
+            <span>{{ connected ? 'Connected — receiving events' : 'Disconnected' }}</span>
+            <button @click="toggle()" :class="{ disconnect: connected }">
+                {{ connected ? 'Disconnect' : 'Reconnect' }}
+            </button>
+        </div>
+
+        <div class="grid">
+            <div class="card">
+                <h3>Server Clock</h3>
+                <div class="clock">{{ clock }}</div>
+                <div class="clock-iso">{{ clockIso }}</div>
+            </div>
+
+            <div class="card">
+                <h3>System Monitor</h3>
+                <div class="stat-row">
+                    <span class="stat-label">CPU</span>
+                    <span class="stat-value" :style="{ color: cpuColor() }">{{ cpuPct }}%</span>
+                </div>
+                <div class="meter">
+                    <div class="meter-fill" :style="{ width: cpuPct + '%', background: cpuColor() }"></div>
+                </div>
+
+                <div class="stat-row" style="margin-top: 10px">
+                    <span class="stat-label">Memory</span>
+                    <span class="stat-value" :style="{ color: memColor() }">{{ memPct }}%</span>
+                </div>
+                <div class="meter">
+                    <div class="meter-fill" :style="{ width: memPct + '%', background: memColor() }"></div>
+                </div>
+
+                <div class="stat-row" style="margin-top: 8px">
+                    <span class="stat-label">RAM</span>
+                    <span class="stat-value">{{ memUsed }} / {{ memTotal }} GB</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Uptime</span>
+                    <span class="stat-value">{{ uptimeStr }}</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Host</span>
+                    <span class="stat-value">{{ hostname }} ({{ platform }})</span>
+                </div>
+            </div>
+
+            <div class="card events-card">
+                <h3>Live Server Log</h3>
+                <div class="log-list">
+                    <div class="log-entry" v-for="l in logs">
+                        <span class="log-time">{{ l.timestamp.split('T')[1].split('.')[0] }}</span>
+                        <span class="log-level" :class="'level-' + l.level">{{ l.level }}</span>
+                        <span class="log-msg">{{ l.message }}</span>
+                    </div>
+                </div>
+                <div class="event-count">Total SSE events received: <span>{{ eventCount }}</span></div>
+            </div>
+        </div>
+
+        <div class="note">
+            The browser EventSource API (Server-Sent Events or SSE) is a popular and well-established technology,
+            particularly for applications that require one-way, real-time data streaming from a server to a client. It
+            is widely used for live dashboards, notification systems, and feeds.
+        </div>
+        <div class="note">
+            SSE uses a single HTTP response that the server keeps open. The browser's
+            <code>EventSource</code> API handles reconnection automatically. Unlike WebSocket,
+            SSE is one-directional (server → client only) — perfect for live dashboards, notifications, and log tailing.
+            Open DevTools → Network and look for the <code>text/event-stream</code> request.
+        </div>
+
+
+        <script src="app.js"></script>
+</body>
+
+</html>

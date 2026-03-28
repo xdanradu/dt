@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Demo 3 — WebSocket Chat</title>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="app" class="chat">
+        <div class="header">
+            <h2>WebSocket Chat</h2>
+            <span class="online">{{ onlineCount }} online</span>
+        </div>
+
+        <div class="name-row">
+            <span>Your name:</span>
+            <input v-model="editName" @keyup.enter="changeName()" :style="{ color: myColor }">
+            <button @click="changeName()">set</button>
+        </div>
+
+        <div class="messages" ref="messages">
+            <div v-for="m in messages"
+                :class="['msg', m.type === 'system' ? 'system' : (m.user === username ? 'mine' : 'other')]">
+                <div class="bubble">
+                    <div class="author" v-if="m.type !== 'system'" :style="{ color: m.color || '#888' }">{{ m.user }}
+                        <span class="timestamp">{{ m.timeStr }}</span>
+                    </div>
+                    <span v-if="m.type === 'system'">{{ m.text }}</span>
+                    <span v-else>{{ m.text }}</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="typing">{{ typingText }}</div>
+
+        <div class="input-bar">
+            <input v-model="draft" @keyup.enter="send()" @input="emitTyping()" placeholder="Type a message..."
+                autofocus>
+            <button @click="send()">Send</button>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>

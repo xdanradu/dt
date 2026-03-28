@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Demo 2 — HTTP Client-Server</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="app" class="layout">
+        <!-- Left: Users CRUD -->
+        <div class="panel main">
+            <h2>Demo 2: HTTP Client-Server</h2>
+            <div class="sub">Every action = one HTTP request. Check the log panel. →</div>
+
+            <div v-for="(user, index) in users" class="user-row">
+                <span class="name">{{ user.name }}</span>
+                <span class="city">{{ user.city }}</span>
+                <button class="del-btn" @click="remove(index)">delete</button>
+            </div>
+            <div v-if="users.length === 0" class="empty">No users. Add one below.</div>
+
+            <div class="add-row">
+                <input v-model="newName" placeholder="Name" @keyup.enter="add()">
+                <input v-model="newCity" placeholder="City" @keyup.enter="add()">
+                <button class="add-btn" @click="add()">+ Add</button>
+            </div>
+
+            <div class="slow-section">
+                <button class="slow-btn" @click="testSlow()">Test slow request (2s delay)</button>
+                <div class="slow-result" v-if="slowResult">{{ slowResult }}</div>
+            </div>
+        </div>
+
+        <!-- Right: Request Log -->
+        <div class="panel sidebar">
+            <h3>Live Request Log <button class="clear-btn" @click="logs = []">clear</button></h3>
+            <div class="log-scroll">
+                <div class="log-entry" v-for="l in logs">
+                    <span class="time">{{ l.time }}</span>
+                    <span :class="'method ' + l.method">{{ l.method }}</span>
+                    <span class="url">{{ l.url }}</span>
+                    <span :class="'status ' + (l.ok ? 'ok' : 'err')">{{ l.ms }}ms</span>
+                </div>
+                <div v-if="logs.length === 0" style="color:#bbb; font-size: 13px;">Requests will appear here...</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
