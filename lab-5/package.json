@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Data Transmission & Reliability in JavaScript — 4-part lab",
   "private": true,
+  "scripts": {
+    "part3": "node part3-arq/run.js"
+  },
   "dependencies": {
     "ws": "^8.18.0"
   }

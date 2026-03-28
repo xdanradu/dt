@@ -7,7 +7,7 @@ const server = dgram.createSocket("udp4");
 
 const PROXY_PORT = 4000;
 const DEST_PORT = 5000;
-const DROP_RATE = 0.3; // 30 % packet loss
+const DROP_RATE = 0.3; // up to 30 % packet loss
 
 let total = 0;
 let dropped = 0;

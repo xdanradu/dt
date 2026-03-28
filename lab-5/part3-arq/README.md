@@ -22,21 +22,29 @@ UDP alone provides no delivery guarantee. In this exercise you will add reliabil
 
 ```
 client  ──▶  proxy (port 4000)  ──▶  server (port 5000)
-   ◀── ACK ──────────────────────────┘
+   ◀── ACK ────────┘ ◀── ACK ──────────┘
 ```
 
-> **Tip:** Reuse the Chaos Proxy from Part 2 (`part2-udp/proxy.js`) to introduce packet loss.
+The Part 3 proxy is **bidirectional**: it forwards client packets to the server *and* relays server ACKs back to the client, applying the drop rate in both directions.
 
 ## Running
 
-Open **three** terminals:
+### Quick start (single terminal)
+
+```bash
+node run.js
+```
+
+This launches the server, proxy, and client with prefixed output.
+
+### Manual start (three terminals)
 
 ```bash
 # Terminal 1 — start the server (receiver + ACK sender)
 node server.js
 
-# Terminal 2 — start the chaos proxy
-node ../part2-udp/proxy.js
+# Terminal 2 — start the bidirectional chaos proxy
+node proxy.js
 
 # Terminal 3 — start the reliable client
 node client.js
