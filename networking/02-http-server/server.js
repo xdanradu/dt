@@ -1,5 +1,9 @@
 const express = require('express');
 const path = require('path');
+
+
+
+
 const app = express();
 
 // express.json() is middleware that parses incoming JSON request bodies.
@@ -38,11 +42,18 @@ app.get('/api/users', (req, res) => {
 // POST /api/users — creates a new user from the JSON body.
 // Validates that both fields exist; returns 400 (Bad Request) if not.
 // Returns the updated full list so the client can re-render without a second request.
-app.post('/api/users', (req, res) => {
+app.put('/api/users', (req, res) => {
     const { name, city } = req.body;
     if (!name || !city) return res.status(400).json({ error: 'Name and city required' });
     users.push({ name, city });
     console.log(`  -> Added "${name}" from ${city}  (total: ${users.length})`);
+    res.json(users);
+});
+
+//update
+app.post('/api/users', (req, res) => {
+    // const { name, city } = req.body;
+    // to be implemented
     res.json(users);
 });
 

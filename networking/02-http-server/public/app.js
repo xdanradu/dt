@@ -21,6 +21,7 @@ function loggedAxios(vm) {
     return {
         get: function (url) { return wrap('get', url); },
         post: function (url, data) { return wrap('post', url, data); },
+        put: function (url, data) { return wrap('put', url, data); },
         delete: function (url) { return wrap('delete', url); }
     };
 }
@@ -47,7 +48,7 @@ new Vue({
         add: function () {
             if (!this.newName || !this.newCity) return;
             var self = this;
-            this.http.post('/api/users', { name: this.newName, city: this.newCity })
+            this.http.put('/api/users', { name: this.newName, city: this.newCity })
                 .then(function (r) { self.users = r.data; self.newName = ''; self.newCity = ''; });
         },
         // DELETE /api/users/:index — removes by position. REST convention:
