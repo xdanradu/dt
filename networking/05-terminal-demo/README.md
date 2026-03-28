@@ -9,7 +9,7 @@ Run these with Demo 2's server already running (`cd 02-http-server && node serve
 curl http://localhost:3000/api/users
 
 # Add a user from terminal
-curl -X POST http://localhost:3000/api/users -H "Content-Type: application/json" -d "{\"name\":\"Ana\",\"city\":\"Cluj\"}"
+curl -X PUT http://localhost:3000/api/users -H "Content-Type: application/json" -d "{\"name\":\"Ana\",\"city\":\"Cluj\"}"
 
 # Delete first user
 curl -X DELETE http://localhost:3000/api/users/0
