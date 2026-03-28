@@ -8,3 +8,5 @@
 6. Frontend (CRUD)
 7. 10 caracteristici specifice ale produsului ales: id, name/title, ...
 8. Intrebari din proiect 
+
+Get-NetUDPEndpoint -LocalPort 4000 -ErrorAction SilentlyContinue | ForEach-Object { Stop-Process -Id $_.OwningProcess -Force }
