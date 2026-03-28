@@ -10,6 +10,6 @@
     "express": "3.x"
   },
   "devDependencies": {
-    "nodemon": "^2.0.3"
+    "nodemon": "^2.0.20"
   }
 }
