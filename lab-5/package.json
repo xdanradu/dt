@@ -1,0 +1,9 @@
+{
+  "name": "data-transmission-lab",
+  "version": "1.0.0",
+  "description": "Data Transmission & Reliability in JavaScript — 4-part lab",
+  "private": true,
+  "dependencies": {
+    "ws": "^8.18.0"
+  }
+}
