@@ -6,6 +6,9 @@ const { WebSocketServer } = require("ws");
 const PORT = 8080;
 const HEARTBEAT_INTERVAL = 5000; // 5 seconds
 
+const startTime = Date.now();
+const elapsed = () => ((Date.now() - startTime) / 1000).toFixed(1);
+
 const wss = new WebSocketServer({ port: PORT });
 
 wss.on("connection", (ws, req) => {
@@ -17,7 +20,7 @@ wss.on("connection", (ws, req) => {
     // When we receive a pong, mark the connection as alive
     ws.on("pong", () => {
         ws.isAlive = true;
-        console.log("  Received Pong!");
+        console.log(`  Received Pong! [${elapsed()}s]`);
     });
 
     // Echo incoming messages back to the client
@@ -40,7 +43,7 @@ const interval = setInterval(() => {
             return ws.terminate();
         }
         ws.isAlive = false;
-        console.log(`Sending Ping... [${new Date().toISOString()}]`);
+        console.log(`Sending Ping... [${elapsed()}s]`);
         ws.ping();
     });
 }, HEARTBEAT_INTERVAL);

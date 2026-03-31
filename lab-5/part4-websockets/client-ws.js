@@ -5,6 +5,9 @@ const WebSocket = require("ws");
 
 const SERVER_URL = "ws://localhost:8080";
 
+const startTime = Date.now();
+const elapsed = () => ((Date.now() - startTime) / 1000).toFixed(1);
+
 const ws = new WebSocket(SERVER_URL);
 
 ws.on("open", () => {
@@ -13,6 +16,15 @@ ws.on("open", () => {
     // Send an initial message
     ws.send("Hello from WebSocket client!");
     console.log("Sent: Hello from WebSocket client!");
+
+    // After 15s, block the event loop for 15s, then close
+    setTimeout(() => {
+        console.log(`[${elapsed()}s] Blocking event loop for 15s — client is unresponsive`);
+        const end = Date.now() + 15000;
+        while (Date.now() < end) { }
+        console.log(`[${elapsed()}s] Event loop resumed — closing connection`);
+        ws.close();
+    }, 15000);
 });
 
 ws.on("message", (data) => {
@@ -20,7 +32,7 @@ ws.on("message", (data) => {
 });
 
 ws.on("ping", () => {
-    console.log(`Received Ping from server (Pong sent automatically) [${new Date().toISOString()}]`);
+    console.log(`Received Ping from server (Pong sent automatically) [${elapsed()}s]`);
 });
 
 ws.on("close", () => {
