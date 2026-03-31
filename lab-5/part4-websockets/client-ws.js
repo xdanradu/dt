@@ -20,7 +20,7 @@ ws.on("message", (data) => {
 });
 
 ws.on("ping", () => {
-    console.log("Received Ping from server (Pong sent automatically)");
+    console.log(`Received Ping from server (Pong sent automatically) [${new Date().toISOString()}]`);
 });
 
 ws.on("close", () => {

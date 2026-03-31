@@ -10,13 +10,14 @@ const EOF = 0x03; // End of Frame
  * Frame layout: [SOF] [Payload] [Checksum] [EOF]
  */
 function createFrame(dataString) {
-    const payload = Buffer.from(dataString);
+    const payload = Buffer.from(dataString);// Convert string to bytes (Buffer)
     // XOR checksum: fold every byte together with ^.
     // Example for "Hi" (0x48, 0x69):
     //   acc starts at 0  → 0x00 ^ 0x48 = 0x48
     //                     → 0x48 ^ 0x69 = 0x21  ← final checksum
     // If any single byte changes in transit, the recomputed value won't match.
-    const checksum = payload.reduce((acc, val) => acc ^ val, 0);
+    const checksum = payload.reduce((acc, val) => acc ^ val, 0);// Decimal value of the checksum
+    console.log('Checksum (base-10):', checksum, 'Binary:', checksum.toString(2), 'HEX (base-16):', Buffer.from([checksum]).toString('hex'), Buffer.from([checksum]).length, "bytes");
 
     const frame = Buffer.concat([
         Buffer.from([SOF]),
@@ -45,7 +46,7 @@ function verifyFrame(frame) {
     const calculatedChecksum = payload.reduce((acc, val) => acc ^ val, 0);
 
     if (calculatedChecksum === receivedChecksum) {
-        console.log("✅ Integrity Verified:", payload.toString());
+        console.log("✅ Integrity Checked:", payload.toString());
         return true;
     } else {
         console.error(
@@ -59,7 +60,7 @@ function verifyFrame(frame) {
 }
 
 // --- Demo ---
-console.log("=== Creating and verifying a valid frame ===");
+console.log("\n=== Creating and verifying a valid frame ===");
 const myFrame = createFrame("Hello Network");
 verifyFrame(myFrame);
 

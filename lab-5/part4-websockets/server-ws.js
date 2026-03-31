@@ -40,7 +40,7 @@ const interval = setInterval(() => {
             return ws.terminate();
         }
         ws.isAlive = false;
-        console.log("Sending Ping...");
+        console.log(`Sending Ping... [${new Date().toISOString()}]`);
         ws.ping();
     });
 }, HEARTBEAT_INTERVAL);
