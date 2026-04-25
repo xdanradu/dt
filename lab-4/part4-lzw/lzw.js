@@ -1,4 +1,4 @@
-const input = "TOBEORNOTTOBEORTOBEORNOT";
+const input = "ABABABABABABABABABABABABABABABAB";
 
 function lzwEncode(text) {
   // Initialize dictionary with all single-byte symbols.
@@ -73,6 +73,7 @@ const originalBits = input.length * 8;
 // Simplified fixed-width code model for easy comparison.
 const codeWidth = 12;
 const encodedBits = encoded.codes.length * codeWidth;
+const compressionRate = ((originalBits - encodedBits) / originalBits) * 100;
 
 console.log("Input:", input);
 console.log("LZW codes:", encoded.codes);
@@ -80,4 +81,7 @@ console.log("Round-trip equal:", decoded.text === input);
 console.log("Dictionary size after encode:", encoded.dictSize);
 console.log("Original bits:", originalBits);
 console.log("Encoded bits (12-bit code model):", encodedBits);
-console.log("Compression ratio:", (originalBits / encodedBits).toFixed(3));
+console.log(
+  "Compression rate (% size reduction; negative means expansion):",
+  `${compressionRate.toFixed(2)}%`
+);

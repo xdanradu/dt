@@ -40,10 +40,14 @@ const decoded = rleDecode(encoded);
 const originalBits = input.length * 8;
 // Teaching model: each run stores 1 byte symbol + 1 byte count.
 const encodedBits = encoded.length * (8 + 8);
+const compressionRate = ((originalBits - encodedBits) / originalBits) * 100;
 
 console.log("Input:", input);
 console.log("Runs:", encoded);
 console.log("Decoded equals input:", decoded === input);
 console.log("Original bits:", originalBits);
 console.log("RLE model bits (8-bit symbol + 8-bit count):", encodedBits);
-console.log("Compression ratio:", (originalBits / encodedBits).toFixed(3));
+console.log(
+  "Compression rate (% size reduction; negative means expansion):",
+  `${compressionRate.toFixed(2)}%`
+);
