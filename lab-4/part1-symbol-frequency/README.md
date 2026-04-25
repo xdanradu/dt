@@ -30,3 +30,28 @@ node symbol-frequency.js
 1. Change `sampleText` to a highly repetitive string and compare entropy.
 2. Change `sampleText` to random-looking text and compare entropy.
 3. Explain why lower entropy often means better compression potential.
+
+## Example Comparison
+
+Try these two `sampleText` values:
+
+```js
+// Repetitive (usually lower entropy)
+const sampleText = "AAAAAAAAABAAAAAAAAA";
+```
+
+```js
+// Random-looking (usually higher entropy)
+const sampleText = "Q7m$2pL!x9T@vR3#K8z";
+```
+
+What to compare after running `node symbol-frequency.js` each time:
+
+1. `Entropy H(X)` value
+2. `Theoretical lower bound`
+3. `Estimated best-case reduction`
+
+Expected pattern:
+
+- Repetitive text -> lower entropy -> better compression potential.
+- Random-looking text -> higher entropy (often closer to 8 bits/symbol) -> worse compression potential.
