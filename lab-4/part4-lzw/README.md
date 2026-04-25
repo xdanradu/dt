@@ -93,3 +93,38 @@ node lzw.js
      dict[nextCode++] = w + entry[0];
    }
    ```
+
+## Quick Summary (Exercise 3)
+
+Adding a dictionary size limit means LZW can only learn new phrases up to a fixed capacity.
+
+1. Before the limit is reached, compression usually improves because more repeated phrases get their own codes.
+2. Once the dictionary is full (saturated), encoder and decoder must stop adding new entries.
+3. Decoding still works correctly, but compression gains often slow down because new patterns cannot be learned.
+
+In short: saturation does not break correctness, but it can reduce compression effectiveness on long inputs.
+
+## Saturation Example
+
+Assume:
+
+- Initial dictionary: codes `0-255` (single-byte symbols)
+- `nextCode = 256`
+- `MAX_DICT_SIZE = 260`
+
+As input is scanned, the encoder may add:
+
+1. `256 -> AB`
+2. `257 -> BA`
+3. `258 -> ABA`
+4. `259 -> ABAB`
+
+Now `nextCode` is `260`, so the dictionary is saturated.
+
+After saturation:
+
+1. Encoder still emits valid codes for phrases that already exist.
+2. Encoder does not add any more phrases (`nextCode < MAX_DICT_SIZE` is false).
+3. Decoder mirrors the same rule, so output remains lossless and correct.
+
+Effect: if new patterns appear later, they cannot be added to the dictionary, so output size is usually larger than with an unlimited dictionary.
