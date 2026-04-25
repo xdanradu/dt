@@ -1,6 +1,7 @@
 const input = "this is a simple huffman example for transmission compression";
 
 function frequencyMap(text) {
+  // Count occurrences for each symbol.
   const map = new Map();
   for (const ch of text) {
     map.set(ch, (map.get(ch) || 0) + 1);
@@ -9,6 +10,7 @@ function frequencyMap(text) {
 }
 
 function buildTree(freq) {
+  // Start from leaf nodes (one per symbol).
   const nodes = Array.from(freq.entries()).map(([ch, count]) => ({ ch, count, left: null, right: null }));
 
   if (nodes.length === 1) {
@@ -16,6 +18,7 @@ function buildTree(freq) {
   }
 
   while (nodes.length > 1) {
+    // Greedy step: merge the two least frequent nodes.
     nodes.sort((a, b) => a.count - b.count);
     const left = nodes.shift();
     const right = nodes.shift();
@@ -26,10 +29,12 @@ function buildTree(freq) {
 }
 
 function buildCodes(node, prefix = "", out = {}) {
+  // Leaf node: prefix is this symbol's Huffman code.
   if (!node.left && !node.right && node.ch !== null) {
     out[node.ch] = prefix || "0";
     return out;
   }
+  // Convention: left = 0, right = 1.
   if (node.left) buildCodes(node.left, prefix + "0", out);
   if (node.right) buildCodes(node.right, prefix + "1", out);
   return out;
@@ -43,6 +48,7 @@ function encode(text, codeTable) {
 }
 
 function decode(bits, tree) {
+  // Traverse the tree bit-by-bit until reaching leaves.
   let out = "";
   let node = tree;
 

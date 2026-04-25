@@ -11,6 +11,14 @@ Measure symbol frequencies and estimate entropy to understand the theoretical lo
 - Shannon entropy $H(X) = -\sum p(x)\log_2 p(x)$
 - Fixed-length baseline size vs entropy lower bound
 
+## How This Implementation Works
+
+1. Uses a fixed `Uint32Array(256)` counter for byte/ASCII symbols.
+2. Converts non-zero counters into rows with count and probability.
+3. Sorts rows by frequency so the dominant symbols are easy to inspect.
+4. Computes entropy with $-\sum p(x)\log_2 p(x)$.
+5. Compares a plain-text baseline (`8 * length` bits) with the entropy lower bound (`H(X) * length`).
+
 ## Run
 
 ```bash

@@ -11,6 +11,14 @@ Create a prefix-code tree from symbol frequencies, encode data with variable-len
 - Prefix-free codes
 - Entropy-aware compression
 
+## How This Implementation Works
+
+1. Builds a symbol frequency map from input text.
+2. Creates leaf nodes and repeatedly merges the two least frequent nodes.
+3. Traverses the final tree (`left = 0`, `right = 1`) to build prefix codes.
+4. Encodes text by replacing each symbol with its Huffman code.
+5. Decodes by traversing the tree bit-by-bit until reaching leaf symbols.
+
 ## Run
 
 ```bash

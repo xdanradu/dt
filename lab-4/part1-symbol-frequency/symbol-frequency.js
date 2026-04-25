@@ -1,6 +1,7 @@
 const sampleText = "red, red, green, red, red, blue, red, red, yellow, yellow, red, red, red, red, red, red, red, red, red, red";
 
 function buildFrequencyTable(text) {
+  // Fixed-size counter for ASCII/byte values 0..255.
   const counts = new Uint32Array(256);
   for (let i = 0; i < text.length; i++) {
     counts[text.charCodeAt(i)]++;
@@ -10,6 +11,7 @@ function buildFrequencyTable(text) {
   const rows = [];
   for (let code = 0; code < counts.length; code++) {
     if (counts[code] > 0) {
+      // Keep only symbols that appear in the input.
       rows.push({
         code,
         symbol: String.fromCharCode(code),
@@ -18,11 +20,13 @@ function buildFrequencyTable(text) {
       });
     }
   }
+  // Most frequent symbols first to make patterns easier to read.
   rows.sort((a, b) => b.count - a.count);
   return rows;
 }
 
 function entropy(rows) {
+  // Shannon entropy: H(X) = -sum(p * log2(p)).
   let h = 0;
   for (const row of rows) {
     h += -row.probability * Math.log2(row.probability);
@@ -33,7 +37,9 @@ function entropy(rows) {
 function printAnalysis(text) {
   const rows = buildFrequencyTable(text);
   const h = entropy(rows);
+  // Baseline: 8 bits per character with plain text encoding.
   const originalBits = text.length * 8;
+  // Theoretical lower bound for any lossless compressor on this source.
   const entropyLowerBoundBits = h * text.length;
 
   console.log("Input:", text);

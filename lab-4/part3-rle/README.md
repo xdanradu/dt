@@ -10,6 +10,14 @@ Compress repeated symbols using count-value runs, then decode to verify lossless
 - Trade-off: great for repetitive data, weak for high-entropy data
 - Lossless round-trip validation
 
+## How This Implementation Works
+
+1. Scans input left-to-right and groups consecutive identical symbols into runs.
+2. Stores each run as `{ symbol, count }`.
+3. Flushes the final run after the loop.
+4. Decodes by repeating each symbol `count` times and concatenating.
+5. Uses a teaching size model of 1 byte for symbol + 1 byte for count per run.
+
 ## Run
 
 ```bash

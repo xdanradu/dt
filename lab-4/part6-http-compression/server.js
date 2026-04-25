@@ -4,6 +4,7 @@ const zlib = require("zlib");
 const PORT = 8080;
 
 function makePayload() {
+  // Repetitive JSON makes compression effects easy to observe.
   const rows = [];
   for (let i = 0; i < 2500; i++) {
     rows.push({
@@ -18,6 +19,7 @@ function makePayload() {
 }
 
 function sendCompressed(res, payload, encoding) {
+  // Compress according to negotiated algorithm, then set Content-Encoding.
   if (encoding === "br") {
     zlib.brotliCompress(payload, (err, compressed) => {
       if (err) return sendError(res, err);
@@ -61,6 +63,7 @@ function sendCompressed(res, payload, encoding) {
     "Content-Type": "application/json",
     "Content-Length": payload.length,
   });
+  // identity means no compression.
   res.end(payload);
 }
 
@@ -70,6 +73,7 @@ function sendError(res, err) {
 }
 
 function negotiateEncoding(header) {
+  // Simple priority order for classroom clarity.
   const value = (header || "").toLowerCase();
   if (value.includes("br")) return "br";
   if (value.includes("gzip")) return "gzip";
@@ -78,12 +82,14 @@ function negotiateEncoding(header) {
 }
 
 const server = http.createServer((req, res) => {
+  // Lightweight health endpoint for quick checks.
   if (req.url === "/health") {
     res.writeHead(200, { "Content-Type": "text/plain" });
     res.end("ok");
     return;
   }
 
+  // Keep the demo focused on one data endpoint.
   if (req.url !== "/data") {
     res.writeHead(404, { "Content-Type": "text/plain" });
     res.end("Use /data or /health");
@@ -91,6 +97,7 @@ const server = http.createServer((req, res) => {
   }
 
   const payload = makePayload();
+  // Read client capability from Accept-Encoding.
   const encoding = negotiateEncoding(req.headers["accept-encoding"]);
 
   console.log(
