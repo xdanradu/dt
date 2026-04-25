@@ -48,6 +48,6 @@ console.log("Decoded equals input:", decoded === input);
 console.log("Original bits:", originalBits);
 console.log("RLE model bits (8-bit symbol + 8-bit count):", encodedBits);
 console.log(
-  "Compression rate (% size reduction; negative means expansion):",
+  "Compression rate (%):",
   `${compressionRate.toFixed(2)}%`
 );

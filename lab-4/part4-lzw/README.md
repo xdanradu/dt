@@ -52,6 +52,44 @@ node lzw.js
 
 ## Exercises
 
-1. Compare compression on repetitive vs non-repetitive text.
-2. Print dictionary growth over time and analyze memory cost.
-3. Limit dictionary size and observe behavior after saturation.
+1. Compare repetitive vs non-repetitive input.
+   1. In `lzw.js`, set `input` to a repetitive string like `ABABABABABABABABABABABABABABABAB` and run `node lzw.js`.
+   2. Note `Original bits`, `Encoded bits`, and `Compression rate`.
+   3. Change `input` to a less repetitive string like `Q7m$2pL!x9T@vR3#K8zW1nB4cD6fH0` and run again.
+   4. Compare results and explain why repetitive input usually compresses better.
+
+2. Track dictionary growth.
+   1. Add a log inside `lzwEncode` right after `dict.set(wc, nextCode++)`.
+   2. Print the new phrase and dictionary size after each insert.
+   3. Run `node lzw.js` and observe how quickly new phrases are created.
+   4. Summarize when growth is fast and when it slows down.
+
+   Optional snippet:
+
+   ```js
+   // Place inside lzwEncode, in the branch where a new phrase is added.
+   dict.set(wc, nextCode++);
+   console.log("added phrase:", wc, "| dict size:", nextCode);
+   ```
+
+3. Test dictionary size limits.
+   1. Add a `MAX_DICT_SIZE` constant (example: `512`) in `lzwEncode` and `lzwDecode`.
+   2. Only add new entries when `nextCode < MAX_DICT_SIZE`.
+   3. Run with longer input and compare output size before and after the limit.
+   4. Describe how saturation affects compression effectiveness.
+
+   Optional snippet:
+
+   ```js
+   const MAX_DICT_SIZE = 512;
+
+   // In lzwEncode, replace direct insert with:
+   if (nextCode < MAX_DICT_SIZE) {
+     dict.set(wc, nextCode++);
+   }
+
+   // In lzwDecode, replace direct insert with:
+   if (nextCode < MAX_DICT_SIZE) {
+     dict[nextCode++] = w + entry[0];
+   }
+   ```

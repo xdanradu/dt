@@ -3,7 +3,7 @@ const zlib = require("zlib");
 
 const PORT = 8080;
 
-function makePayload() {
+function makePayload(pretty) {
   // Repetitive JSON makes compression effects easy to observe.
   const rows = [];
   for (let i = 0; i < 2500; i++) {
@@ -15,7 +15,10 @@ function makePayload() {
       timestamp: 1700000000 + i,
     });
   }
-  return Buffer.from(JSON.stringify({ source: "lab-4", rows }));
+  const json = pretty
+    ? JSON.stringify({ source: "lab-4", rows }, null, 2)
+    : JSON.stringify({ source: "lab-4", rows });
+  return Buffer.from(json);
 }
 
 function sendCompressed(res, payload, encoding) {
@@ -82,21 +85,25 @@ function negotiateEncoding(header) {
 }
 
 const server = http.createServer((req, res) => {
+  const url = new URL(req.url, `http://${req.headers.host || "localhost"}`);
+
   // Lightweight health endpoint for quick checks.
-  if (req.url === "/health") {
+  if (url.pathname === "/health") {
     res.writeHead(200, { "Content-Type": "text/plain" });
     res.end("ok");
     return;
   }
 
   // Keep the demo focused on one data endpoint.
-  if (req.url !== "/data") {
+  if (url.pathname !== "/data") {
     res.writeHead(404, { "Content-Type": "text/plain" });
     res.end("Use /data or /health");
     return;
   }
 
-  const payload = makePayload();
+  const prettyFlag = (url.searchParams.get("pretty") || "").toLowerCase();
+  const pretty = prettyFlag === "1" || prettyFlag === "true" || prettyFlag === "yes";
+  const payload = makePayload(pretty);
   // Read client capability from Accept-Encoding.
   const encoding = negotiateEncoding(req.headers["accept-encoding"]);
 
@@ -105,6 +112,9 @@ const server = http.createServer((req, res) => {
     req.headers["accept-encoding"] || "<none>",
     "-> using",
     encoding,
+    "(mode:",
+    pretty ? "pretty" : "compact",
+    ")",
     "(raw bytes:",
     payload.length + ")"
   );

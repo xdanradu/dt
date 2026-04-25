@@ -82,6 +82,6 @@ console.log("Dictionary size after encode:", encoded.dictSize);
 console.log("Original bits:", originalBits);
 console.log("Encoded bits (12-bit code model):", encodedBits);
 console.log(
-  "Compression rate (% size reduction; negative means expansion):",
+  "Compression rate (%):",
   `${compressionRate.toFixed(2)}%`
 );

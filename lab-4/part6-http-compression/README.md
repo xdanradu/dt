@@ -30,10 +30,16 @@ Server URL: `http://localhost:8080/data`
 
 ```bash
 curl -i http://localhost:8080/data
+curl -i "http://localhost:8080/data?pretty=1"
 curl -i -H "Accept-Encoding: gzip" http://localhost:8080/data
 curl -i -H "Accept-Encoding: br" http://localhost:8080/data
 curl -i -H "Accept-Encoding: deflate" http://localhost:8080/data
 ```
+
+Brief example:
+
+- Compact JSON (default): `/data`
+- Pretty JSON (indented): `/data?pretty=1` (also accepts `pretty=true`)
 
 ## Exercises
 
