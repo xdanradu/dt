@@ -1,0 +1,18 @@
+{
+  "name": "compression-apps",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Simple compression teaching apps",
+  "scripts": {
+    "app1": "node 01-entropy-playground/app.js",
+    "app2": "node 02-rle-basics/app.js",
+    "app3": "node 03-lzw-basics/app.js",
+    "app4": "node 04-huffman-basics/app.js",
+    "app5-server": "node 05-book-transfer/server.js",
+    "app5-client": "node 05-book-transfer/client.js",
+    "app6": "node 06-image-compression/app.js"
+  },
+  "dependencies": {
+    "sharp": "^0.34.2"
+  }
+}
